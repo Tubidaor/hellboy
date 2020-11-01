@@ -5,8 +5,11 @@ export default class HomePage extends Component {
 
   render() {
     return(
-      <main>
-        this is the main page.
+      <main className="home-main">
+        <div>
+
+          this is the main page.
+        </div>
       </main>
     )
   }

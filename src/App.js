@@ -12,15 +12,15 @@ function App() {
         <Route
           exact
           path={"/"}
-          compoment={HomePage}
+          component={HomePage}
         />
         <Route
           path={"/about-me"}
-          compoment={AboutMePage}
+          component={AboutMePage}
         />
         <Route
           path={"/shop"}
-          compoment={ShopPage}
+          component={ShopPage}
         />
       </Switch>
     </div>
