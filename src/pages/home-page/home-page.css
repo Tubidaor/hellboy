@@ -1,3 +1,13 @@
 .home-main {
-  background-color: black;
+  /* background-color: black; */
+  margin-top: 50px;
+}
+.main-vid {
+  width: 90%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 100px;
+
 }

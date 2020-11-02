@@ -1,2 +1,9 @@
 @import-normalize;
-
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+a {
+  text-decoration: none;
+}

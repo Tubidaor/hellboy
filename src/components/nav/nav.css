@@ -1,0 +1,39 @@
+.nav-con {
+  border: 2px black solid;
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.nav-ul-con {
+  display: flex;
+  height: 100%;
+}
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  align-self: end;
+}
+
+.nav-ul li {
+  list-style: none;
+  background-color: red;
+}
+.social-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul > li {
+  list-style: none;
+}
