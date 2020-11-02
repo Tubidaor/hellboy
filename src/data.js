@@ -33,6 +33,15 @@ export const tshirts = [
   }
 ]
 
+const hours = [
+  {
+    date: 11/1/2020,
+    hours: 10,
+    research: 4,
+    progress: 6
+  }
+]
+
 export default {
   tshirts
 }
