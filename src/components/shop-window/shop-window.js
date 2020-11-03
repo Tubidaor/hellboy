@@ -45,19 +45,14 @@ export default class ShopWindow extends Component {
   }
   render() {
 
-    // const displayTshirts = this.state.tshirts.map(tshirt => {
-    //     return (
-    //     <img src={tshirt.src} alt={tshirt.description}/>
-    //     )
-    //   }
-    // )
+
     const shirts = this.state.tshirts
     const index = this.state.index
     console.log(index)
     return(
       <div className="window-shop-con">
         {/* {displayTshirts} */}
-        <img src={shirts[index].src} alt={shirts[index].description} />
+        <img className="window-img" src={shirts[index].src} alt={shirts[index].description} />
         <div className="left-arrow" onClick={this.imgLeft}>
           <FontAwesomeIcon className="chevron-left" icon={faChevronLeft}/>
         </div>

@@ -9,7 +9,7 @@
   background-image: url("../../documents/t-shirt1.jpg");
   overflow: hidden;
 }
-img {
+.window-img {
   width: 280px;
   height: 280px;
 }
@@ -54,11 +54,11 @@ img:hover + .left-arrow + .right-arrow {
   .left-arrow, .right-arrow {
     display: none;
   }
-  img:hover + .left-arrow {
+  .window-img:hover + .left-arrow {
     display: flex;
     justify-content: center;
   }
-  img:hover + .left-arrow + .right-arrow {
+  .window-img:hover + .left-arrow + .right-arrow {
     display: flex;
     justify-content: center;
   }

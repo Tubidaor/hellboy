@@ -1,0 +1,28 @@
+.product-con {
+  position: relative;
+  margin-bottom: 10px;
+}
+.browsing-img {
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: relative;
+}
+.product-summary {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0px;
+  right: 0px;
+  height: 40px;
+  background-color: rgba( 0, 0, 0, .6);
+  color: white;
+
+}

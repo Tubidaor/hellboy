@@ -5,6 +5,7 @@ import AboutMePage from './pages/about-me-page/about-me-page'
 import HomePage from './pages/home-page/home-page'
 import ShopPage from './pages/shop-page/shop-page'
 import Nav from './components/nav/nav'
+import ProductPage from './pages/product-page/product-page'
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
         <Route
           path={"/shop"}
           component={ShopPage}
+        />
+        <Route
+          path={"/products/:product-id"}
+          component={ProductPage}
         />
       </Switch>
       <footer>I am a footer.</footer>

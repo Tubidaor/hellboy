@@ -6,12 +6,14 @@ import tshirt4 from './documents/t-shirt4.jpg'
 const IMG_PATH = './documents/'
 export const tshirts = [
   {
+    id: 1,
     name: 't-shirt1',
     description: 'description for tshirt1',
     price: 25.00,
     src: tshirt1
   },
   {
+    id: 2,
     name: 't-shirt2',
     description: 'description for tshirt2',
     price: 25.00,
@@ -19,6 +21,7 @@ export const tshirts = [
 
   },
   {
+    id: 3,
     name: 't-shirt3',
     description: 'description for tshirt3',
     price: 25.00,
@@ -26,6 +29,7 @@ export const tshirts = [
 
   },
   {
+    id: 4,
     name: 't-shirt4',
     description: 'description for tshirt4',
     price: 25.00,
