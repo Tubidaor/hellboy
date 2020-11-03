@@ -11,25 +11,21 @@ export default class ProductPage extends Component {
   }
 
   findProduct = (products, productId) => {
-    products.filter(product => product.id == productId)
-    return products[0]
+    return products.filter(product => product.id == productId)[0]
   }
   render() {
     const { productId } = this.props.match.params
     const allProducts = tshirts
     const product = this.findProduct(allProducts, productId)
-    console.log(product)
-    console.log(allProducts[0].id == productId)
+    console.log(product, productId)
+    console.log(allProducts[1].id == productId)
 
     return (
       <main className="product-page-main">
         <h1>Product Details</h1>
         <ProductDetails
-          description={product.description}
-          src={product.src}
-          alt={product.description}
+          product={product}
         />
-
       </main>
     )
   }
