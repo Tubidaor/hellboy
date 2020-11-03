@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './product-page.css'
-import shirts from '../../data';
+import { tshirts } from '../../data';
+import ProductDetails from '../../components/product-details/product-details';
 
 export default class ProductPage extends Component {
   defaultProps = {
@@ -14,14 +15,17 @@ export default class ProductPage extends Component {
   }
   render() {
     const productId = this.props.match.params
-    const allProducts = shirts
+    const allProducts = tshirts
     const product = this.findProduct(allProducts, productId)
+    console.log(product, this.props.match.params)
 
     return (
       <main className="product-page-main">
-        {product.description}
-        {product.price}
-        {}
+        <div>hello world</div>
+        <ProductDetails
+          description={product.description}
+          src={product.src}
+          />
 
       </main>
     )

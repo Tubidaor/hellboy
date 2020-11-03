@@ -1,25 +1,22 @@
-import React, { Component } from 'react'
-
 import './products.css'
 
-export default class Products extends Component {
+export default function Products(props) {
   
 
-  render() {
     return (
       <div className="product-con">
         <img
-          id={this.props.id}
-          className={this.props.class}
-          src={this.props.shirt}
-          alt={this.props.description}
-          onClick={e => this.props.details(this.props.id)}
+          id={props.id}
+          className={props.class}
+          src={props.shirt}
+          alt={props.description}
+          onClick={e => props.details(props.id)}
         />
         <div className="product-summary">
-          <div >{this.props.price}</div>
-          <p onClick={e => this.props.details(this.props.id)}>{this.props.description}</p>
+          <div >{props.price}</div>
+          <p onClick={e => props.details(props.id)}>{props.description}</p>
         </div>
       </div>
     )
-  }
+  
 }

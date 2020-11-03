@@ -27,7 +27,7 @@ function App() {
           component={ShopPage}
         />
         <Route
-          path={"/products/:product-id"}
+          path={"/products/:productId"}
           component={ProductPage}
         />
       </Switch>
