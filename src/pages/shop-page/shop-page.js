@@ -33,7 +33,7 @@ export default class ShopPage extends Component {
           class={"browsing-img"}
           price={tshirt.price}
           description={tshirt.description}
-          shirt={tshirt.src}
+          shirt={tshirt.src.main.picture1}
           details={this.handleRedirect}
         />
         )

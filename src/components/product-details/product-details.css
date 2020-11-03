@@ -1,0 +1,16 @@
+.product-details-sec {
+  /* margin-top: 75px; */
+}
+.product-details-sec p {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.details-img {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

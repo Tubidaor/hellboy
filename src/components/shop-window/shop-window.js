@@ -52,7 +52,7 @@ export default class ShopWindow extends Component {
     return(
       <div className="window-shop-con">
         {/* {displayTshirts} */}
-        <img className="window-img" src={shirts[index].src} alt={shirts[index].description} />
+        <img className="window-img" src={shirts[index].src.main.picture1} alt={shirts[index].description} />
         <div className="left-arrow" onClick={this.imgLeft}>
           <FontAwesomeIcon className="chevron-left" icon={faChevronLeft}/>
         </div>
