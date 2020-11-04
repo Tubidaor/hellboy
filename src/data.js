@@ -29,20 +29,20 @@ export const tshirts = [
         picture4: black,
         picture5: black
       },
-      gray: {
-        picture1: gray,
-        picture2: gray,
-        picture3: gray,
-        picture4: gray,
-        picutre5: gray
-      },
-      blue: {
-        picture1: blue,
-        picture2: blue,
-        picture3: blue,
-        picture4: blue,
-        picture5: blue
-      },
+      // gray: {
+      //   picture1: gray,
+      //   picture2: gray,
+      //   picture3: gray,
+      //   picture4: gray,
+      //   picutre5: gray
+      // },
+      // blue: {
+      //   picture1: blue,
+      //   picture2: blue,
+      //   picture3: blue,
+      //   picture4: blue,
+      //   picture5: blue
+      // },
       orange: {
         picture1: orange,
         picture2: orange,
@@ -73,13 +73,13 @@ export const tshirts = [
         picture4: black,
         picture5: black
       },
-      gray: {
-        picture1: gray,
-        picture2: gray,
-        picture3: gray,
-        picture4: gray,
-        picutre5: gray
-      },
+      // gray: {
+      //   picture1: gray,
+      //   picture2: gray,
+      //   picture3: gray,
+      //   picture4: gray,
+      //   picutre5: gray
+      // },
       blue: {
         picture1: blue,
         picture2: blue,
@@ -117,27 +117,27 @@ export const tshirts = [
         picture4: black,
         picture5: black
       },
-      gray: {
-        picture1: gray,
-        picture2: gray,
-        picture3: gray,
-        picture4: gray,
-        picutre5: gray
-      },
-      blue: {
-        picture1: blue,
-        picture2: blue,
-        picture3: blue,
-        picture4: blue,
-        picture5: blue
-      },
-      orange: {
-        picture1: orange,
-        picture2: orange,
-        picture3: orange,
-        picture4: orange,
-        picture5: orange
-      }
+      // gray: {
+      //   picture1: gray,
+      //   picture2: gray,
+      //   picture3: gray,
+      //   picture4: gray,
+      //   picutre5: gray
+      // },
+      // blue: {
+      //   picture1: blue,
+      //   picture2: blue,
+      //   picture3: blue,
+      //   picture4: blue,
+      //   picture5: blue
+      // },
+      // orange: {
+      //   picture1: orange,
+      //   picture2: orange,
+      //   picture3: orange,
+      //   picture4: orange,
+      //   picture5: orange
+      // }
     }
   },
   {
@@ -168,20 +168,20 @@ export const tshirts = [
         picture4: gray,
         picutre5: gray
       },
-      blue: {
-        picture1: blue,
-        picture2: blue,
-        picture3: blue,
-        picture4: blue,
-        picture5: blue
-      },
-      orange: {
-        picture1: orange,
-        picture2: orange,
-        picture3: orange,
-        picture4: orange,
-        picture5: orange
-      }
+      // blue: {
+      //   picture1: blue,
+      //   picture2: blue,
+      //   picture3: blue,
+      //   picture4: blue,
+      //   picture5: blue
+      // },
+      // orange: {
+      //   picture1: orange,
+      //   picture2: orange,
+      //   picture3: orange,
+      //   picture4: orange,
+      //   picture5: orange
+      // }
     }
   }
 ]

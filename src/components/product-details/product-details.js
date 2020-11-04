@@ -7,14 +7,16 @@ export default class ProductDetails extends Component {
     super(props)
     this.state = {
       mainImage: null,
-      currentColor: 'main' 
+      currentColor: 'main',
+      colors: []
     }
   }
   componentDidMount() {
     const { product } = this.props
-    console.log(product)
+    const availColors = Object.keys(product.src)
+    console.log(Object.keys(product.src))
     if(this.state.mainImage === null) {
-      this.setState({mainImage: product.src.main.picture1})
+      this.setState({mainImage: product.src.main.picture1, colors: availColors})
     }
 
   }
@@ -40,79 +42,127 @@ export default class ProductDetails extends Component {
   }
   render() {
     const { product } = this.props
-    const  { mainImage, currentColor } = this.state
+    const  { mainImage, currentColor, colors } = this.state
     
-    
-    // .map(col => console.log(col[1]))
-    // .map(img => <img src={img[1]} alt={product.description + img[0]}/>)
-    // previewColors.map(color => console.log(Object.entries(color[1])))
-    // .map(img => <img src={img[1]} alt={product.description + color[0]}/>))
- 
-      const previewImages = Object.entries(product.src.main).map(p =>
-        <img
-          className="product-preview-img"
-          src={p[1]}
-          alt={product.description}
-          onClick={e => this.handleImgChange(p[1])}
-        />
-      )
-      const previewColors = Object.entries(product.src).slice(1)
-      const black = Object.entries(previewColors[0][1]).map(col =>
-        <img
-          className="color-img"
-          src={col[1]}
-          onClick={e => this.handleImgChange(col[1])}
-        />
-      )
-      const gray = Object.entries(previewColors[1][1]).map(col => 
-        <img
-          className="color-img"
-          src={col[1]}
-          onClick={e => this.handleImgChange(col[1])}
-        />
-      )
-      const blue = Object.entries(previewColors[2][1]).map(col =>
-        <img
-          className="color-img"
-          src={col[1]}
-          onClick={e => this.handleImgChange(col[1])}
+    function mainImages() {
+      const mainImages = product.src.main
+      if(mainImages === undefined) {
+        return
+      } else {
+        return Object.entries(mainImages).map(col =>
+          <img
+            className="product-preview-img"
+            src={col[1]}
+            alt={product.description}
+            onClick={e => this.handleImgChange(col[1])}
           />
         )
-      const orange = Object.entries(previewColors[3][1]).map(col => 
-        <img
-          className="color-img"
-          src={col[1]}
-          onClick={e => this.handleImgChange(col[1])}
-        />
-      )
-      const blackMain = previewColors[0][1].picture1
-      const grayMain = previewColors[1][1].picture1
-      const blueMain = previewColors[2][1].picture1
-      const orangeMain = previewColors[3][1].picture1
+      }
+    }
+    
+    function blackColor() {
+      const black = product.src.black
+      if(black === undefined) {
+        return
+      } else {
+        return Object.entries(black).map(col =>
+          <img
+            className="color-img"
+            src={col[1]}
+            onClick={e => this.handleImgChange(col[1])}
+          />
+        )
+      } 
+    }
+
+    function grayColor() {
+      const gray = product.src.gray
+      if(gray === undefined) {
+        return
+      } else {
+        return Object.entries(gray).map(col =>
+          <img
+            className="color-img"
+            src={col[1]}
+            onClick={e => this.handleImgChange(col[1])}
+          />
+        )
+      } 
+    }
+
+    function blueColor() {
+      const blue = product.src.blue
+      if(blue === undefined) {
+        return
+      } else {
+          return Object.entries(blue).map(col =>
+            <img
+              className="color-img"
+              src={col[1]}
+              onClick={e => this.handleImgChange(col[1])}
+            />
+          )
+      }
+    }
+
+    function orangeColor() {
+      const orange = product.src.orange
+      if(orange === undefined) {
+        return
+      } else {
+          return Object.entries(orange).map(col =>
+            <img
+              className="color-img"
+              src={col[1]}
+              onClick={e => this.handleImgChange(col[1])}
+            />
+          )
+      }
+    }
+    const mainMain = () => { return colors.includes('black') ? product.src.main.picture1 : ''}
+    const blackMain = () => { return colors.includes('black') ? product.src.black.picture1 : ''}
+    const grayMain = () => { return colors.includes('gray') ? product.src.gray.picture1 : ''}
+    const blueMain = () => { return colors.includes('blue') ? product.src.blue.picture1 : ''}
+    const orangeMain = () => { return colors.includes('orange') ? product.src.orange.picture1 : ''}
       
     return (
       <section className="product-details-sec">
         <div className="preview-img-con">
-            {currentColor === 'main' && previewImages}
-            {currentColor === 'black' && black}
-            {currentColor === 'gray' && gray}
-            {currentColor === 'blue' && blue}
-            {currentColor === 'orange' && orange}
+            {currentColor === 'main' && mainImages()}
+            {currentColor === 'black' && blackColor()}
+            {currentColor === 'gray' && grayColor()}
+            {currentColor === 'blue' && blueColor()}
+            {currentColor === 'orange' && orangeColor()}
         </div>
         <div className="product-details-main-img-con">
           <p>{product.description}</p>
           <img className="details-img" src={mainImage} alt={product.description}></img>
           <div className="colors-preview">
-          <div className='preview-main' onClick={e => (this.colorChange('main'), this.handleImgChange(product.src.main.picture1))}>
-            </div>
-            <div className='preview-black' onClick={e => (this.colorChange('black'), this.handleImgChange(blackMain))}>
-            </div>
-            <div className='preview-gray' onClick={e => (this.colorChange('gray'), this.handleImgChange(grayMain))}>
-            </div>
-            <div className='preview-blue' onClick={e => (this.colorChange('blue'), this.handleImgChange(blueMain))}>
-            </div>
-            <div className='preview-orange' onClick={e => (this.colorChange('orange'), this.handleImgChange(orangeMain))}>
-            </div>
+            { 
+              colors.includes('main') &&
+              <div className='preview-main' onClick={e => (this.colorChange('main'), this.handleImgChange(product.src.main.picture1))}>
+              </div>
+            }
+            { 
+              colors.includes('black') &&
+              <div className='preview-black' onClick={e => (this.colorChange('black'), this.handleImgChange(blackMain()))}>
+              </div>
+            }
+            {
+              colors.includes('gray') &&
+              <div className='preview-gray' onClick={e => (this.colorChange('gray'), this.handleImgChange(grayMain()))}>
+              </div>
+            }
+            {
+              colors.includes('blue') &&
+              <div className='preview-blue' onClick={e => (this.colorChange('blue'), this.handleImgChange(blueMain()))}>
+              </div>
+            }
+            {
+              colors.includes('orange') &&
+              <div className='preview-orange' onClick={e => (this.colorChange('orange'), this.handleImgChange(orangeMain()))}>
+              </div>
+            }
           </div>
         </div>
 
