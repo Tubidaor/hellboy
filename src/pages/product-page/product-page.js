@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './product-page.css'
 import { tshirts } from '../../data';
 import ProductDetails from '../../components/product-details/product-details';
+import SizingChart from '../../components/sizing-chart/sizing-chart'
 
 export default class ProductPage extends Component {
   defaultProps = {
@@ -26,6 +27,8 @@ export default class ProductPage extends Component {
         <ProductDetails
           product={product}
         />
+        <SizingChart/>
+
       </main>
     )
   }

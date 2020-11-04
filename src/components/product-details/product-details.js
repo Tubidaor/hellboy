@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SizingChart from '../sizing-chart/sizing-chart'
 import './product-details.css'
 
 export default class ProductDetails extends Component {
