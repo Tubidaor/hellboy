@@ -14,7 +14,6 @@ export default class ProductDetails extends Component {
   componentDidMount() {
     const { product } = this.props
     const availColors = Object.keys(product.src)
-    console.log(Object.keys(product.src))
     if(this.state.mainImage === null) {
       this.setState({mainImage: product.src.main.picture1, colors: availColors})
     }
@@ -25,24 +24,29 @@ export default class ProductDetails extends Component {
       mainImage: null
     })
   }
+
   handleImgChange = (mainImage) => {
     console.log('pic changed')
     this.setState({
       mainImage
     })
   }
+
   colorChange = (color) => {
     this.setState({
       currentColor: color
     })
   }
+
   handleImgAndMainChange = (color, mainImage) => {
       this.setState({mainImage})
     return color
   }
+
   render() {
     const { product } = this.props
     const  { mainImage, currentColor, colors } = this.state
+    const handleImgChange = this.handleImgChange
     
     function mainImages() {
       const mainImages = product.src.main
@@ -54,7 +58,7 @@ export default class ProductDetails extends Component {
             className="product-preview-img"
             src={col[1]}
             alt={product.description}
-            onClick={e => this.handleImgChange(col[1])}
+            onClick={e => handleImgChange(col[1])}
           />
         )
       }
@@ -69,7 +73,7 @@ export default class ProductDetails extends Component {
           <img
             className="color-img"
             src={col[1]}
-            onClick={e => this.handleImgChange(col[1])}
+            onClick={e => handleImgChange(col[1])}
           />
         )
       } 
@@ -84,7 +88,7 @@ export default class ProductDetails extends Component {
           <img
             className="color-img"
             src={col[1]}
-            onClick={e => this.handleImgChange(col[1])}
+            onClick={e => handleImgChange(col[1])}
           />
         )
       } 
@@ -99,7 +103,7 @@ export default class ProductDetails extends Component {
             <img
               className="color-img"
               src={col[1]}
-              onClick={e => this.handleImgChange(col[1])}
+              onClick={e => handleImgChange(col[1])}
             />
           )
       }
@@ -114,7 +118,7 @@ export default class ProductDetails extends Component {
             <img
               className="color-img"
               src={col[1]}
-              onClick={e => this.handleImgChange(col[1])}
+              onClick={e => handleImgChange(col[1])}
             />
           )
       }
@@ -165,7 +169,6 @@ export default class ProductDetails extends Component {
             }
           </div>
         </div>
-
       </section>
     )
   }
