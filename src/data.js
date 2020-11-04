@@ -14,6 +14,12 @@ export const tshirts = [
     name: 't-shirt1',
     description: 'description for tshirt1',
     price: 25.00,
+    sizes: {
+      small: 5,
+      medium: 5,
+      large: 5,
+      xlarge: 5
+    },
     src: {
       main: {
         picture1: tshirt1,
@@ -58,6 +64,12 @@ export const tshirts = [
     name: 't-shirt2',
     description: 'description for tshirt2',
     price: 25.00,
+    sizes: {
+      small: 5,
+      medium: 5,
+      large: 5,
+      xlarge: 5
+    },
     src: {
       main: {
         picture1: tshirt2,
@@ -102,6 +114,12 @@ export const tshirts = [
     name: 't-shirt3',
     description: 'description for tshirt3',
     price: 25.00,
+    sizes: {
+      small: 5,
+      medium: 5,
+      large: 5,
+      xlarge: 5
+    },
     src: {
       main: {
         picture1: tshirt3,
@@ -146,6 +164,12 @@ export const tshirts = [
     name: 't-shirt4',
     description: 'description for tshirt4',
     price: 25.00,
+    sizes: {
+      small: 5,
+      medium: 5,
+      large: 5,
+      xlarge: 5
+    },
     src: {
       main: {
         picture1: tshirt4,
@@ -198,6 +222,12 @@ const hours = [
     hours: 7,
     research: 1,
     progress: 6
+  },
+  {
+    date: 11/3/2020,
+    hours: 9,
+    research: 2,
+    progress: 7
   }
 ]
 

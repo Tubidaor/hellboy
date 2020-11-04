@@ -68,3 +68,11 @@
   width: 10px;
   border-radius: 50%;
 }
+.sizes-con {
+  margin-top: 20px;
+}
+.size-sel-con {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
