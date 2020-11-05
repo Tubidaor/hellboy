@@ -1,0 +1,81 @@
+.regFormH2 {
+  text-align: center;
+  font-family: 'Cinzel Decorative', cursive;
+  color: rgba(210, 217, 220, 1);
+}
+.firstNameCon {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.lastNameCon, .emailCon, .pwCon, .pwCCon, .bdCon, .genderCon {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+#emailLab, #pwLab, #pwConfirm {
+  border-radius: 4px;
+}
+#monthSelect {
+  width: 64px;
+  height: 20px;
+  border-radius: 4px;
+}
+#daysSelect {
+  width: 50px;
+  height: 20px;
+  border-radius: 4px;
+}
+#yearSelect {
+  width: 55px;
+  height: 20px;
+  border-radius: 4px;
+}
+#genSelect {
+  height: 20px;
+  border-radius: 4px;
+}
+.regSubmit {
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Nothing You Could Do', cursive;
+  background-color: rgba(210, 217, 220, 1);
+  color: #40616e;
+  font-size: 1em;
+}
+.regSubmit:active {
+  background-color: #758f9a;
+  color: rgba(210, 217, 220, 1);
+}
+.regSubmit:hover {
+  cursor: pointer;
+}
+.regForm {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 260px;
+}
+.regFormTopCon label {
+  font-family: 'Cinzel Decorative', cursive;
+  color: rgba(210, 217, 220, 1);
+  font-size: .83em;
+  font-weight: bold;
+}
+.regFormTopCon input {
+  height: 20px;
+  border-radius: 4px;
+}
+.errorCon {
+  margin-top: 6px;
+}

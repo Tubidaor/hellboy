@@ -1,0 +1,14 @@
+
+
+.empty-cart-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.empty-cart-message p {
+  text-align: center;
+}
+.empty-cart-btn {
+  width: 200px;
+  align-self: center;
+}

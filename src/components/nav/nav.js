@@ -6,6 +6,10 @@ export default function Nav() {
   return (
     //Vinc Pichel
     <header className="nav-con">
+      <div className="sign-in-cart-icon-con">
+        <Link to={'/login'}>Login</Link>
+        <Link to={'/cart'}>Cart</Link>
+      </div>
       <div className="nav-ul-con">
         <ul className="nav-ul">
           <li>

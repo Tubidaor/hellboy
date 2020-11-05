@@ -37,3 +37,8 @@
 ul > li {
   list-style: none;
 }
+.sign-in-cart-icon-con {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

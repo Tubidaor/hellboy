@@ -6,6 +6,9 @@ import HomePage from './pages/home-page/home-page'
 import ShopPage from './pages/shop-page/shop-page'
 import Nav from './components/nav/nav'
 import ProductPage from './pages/product-page/product-page'
+import CartPage from './pages/cart-page/cart-page'
+import LoginPage from './pages/login-page/login-page'
+import RegPage from './pages/reg-page/reg-page'
 
 
 function App() {
@@ -30,6 +33,19 @@ function App() {
           path={"/products/:productId"}
           component={ProductPage}
         />
+        <Route
+          path={"/cart"}
+          component={CartPage}
+        />
+        <Route
+          path={"/login"}
+          component={LoginPage}
+        />
+        <Route
+          path={"/register"}
+          component={RegPage}
+        />
+
       </Switch>
       <footer>I am a footer.</footer>
     </div>
