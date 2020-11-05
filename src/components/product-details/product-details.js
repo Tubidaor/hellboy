@@ -46,7 +46,7 @@ export default class ProductDetails extends Component {
   }
 
   handleSizeChange = (size) => {
-    this.setState({size: "Size:" + " " + size})
+    this.setState({size: "Size:" + " " + size}, this.props.handleSizeChange(size))
   }
 
   render() {

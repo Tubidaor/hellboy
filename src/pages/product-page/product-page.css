@@ -1,5 +1,8 @@
 .product-page-main {
   margin-top: 75px;
+  height: calc(100vh - 125px);
+  overflow: scroll;
+
 }
 .product-page-main h1 {
   text-align: center;
