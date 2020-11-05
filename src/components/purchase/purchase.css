@@ -1,0 +1,18 @@
+.purchase-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.purchase-btn-con {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.price-quantity-con {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}

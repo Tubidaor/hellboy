@@ -1,0 +1,13 @@
+.about-me-main {
+  margin-top: 50px;
+}
+.about-me-header {
+  margin-top: 75px;
+  text-align: center;
+}
+.about-me-main p {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid black;
+}
