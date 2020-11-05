@@ -228,6 +228,11 @@ const hours = [
     hours: 9,
     research: 2,
     progress: 7
+  },  {
+    date: 11/4/2020,
+    hours: 6,
+    research: 0,
+    progress: 6
   }
 ]
 

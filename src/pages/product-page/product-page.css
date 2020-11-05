@@ -2,6 +2,7 @@
   margin-top: 75px;
   height: calc(100vh - 125px);
   overflow: scroll;
+  padding-bottom: 30px;
 
 }
 .product-page-main h1 {

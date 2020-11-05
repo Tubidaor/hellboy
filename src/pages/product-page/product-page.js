@@ -4,6 +4,7 @@ import { tshirts } from '../../data';
 import ProductDetails from '../../components/product-details/product-details'
 import SizingChart from '../../components/sizing-chart/sizing-chart'
 import Purchase from '../../components/purchase/purchase'
+import ProductMiscInfo from '../../components/product-misc-info/product-misc-info'
 
 export default class ProductPage extends Component {
   defaultProps = {
@@ -41,6 +42,7 @@ export default class ProductPage extends Component {
         />
         <SizingChart/>
         <Purchase product={product} size={this.state.currentSize}/>
+        <ProductMiscInfo />
 
       </main>
     )
