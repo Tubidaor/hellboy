@@ -228,12 +228,27 @@ const hours = [
     hours: 9,
     research: 2,
     progress: 7
-  },  {
+  }, 
+  {
     date: 11/4/2020,
     hours: 6,
     research: 0,
     progress: 6
-  }
+  },
+  {
+    date: 11/5/2020,
+    hours: 8,
+    research: 0,
+    progress: 8
+  },
+  {
+    date: 11/6/2020,
+    hours: 4,
+    research: 0,
+    progress: 4
+  },
+
+
 ]
 
 export default {

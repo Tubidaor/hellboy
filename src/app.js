@@ -9,6 +9,7 @@ import ProductPage from './pages/product-page/product-page'
 import CartPage from './pages/cart-page/cart-page'
 import LoginPage from './pages/login-page/login-page'
 import RegPage from './pages/reg-page/reg-page'
+import CheckoutPage from './pages/checkout-page/checkout-page'
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
         <Route
           path={"/register"}
           component={RegPage}
+        />
+        <Route
+          path={"/checkout"}
+          component={CheckoutPage}
         />
 
       </Switch>

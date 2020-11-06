@@ -1,6 +1,6 @@
 import './cart-item.css'
 
-export default function CartItem(props) {
+export default function CartItems(props) {
 
   const { cart } = props
 
@@ -36,7 +36,7 @@ export default function CartItem(props) {
         <ul className="cart-item-ul">
           {displayItemSummary}
         </ul>
-        <button className="checkout-btn">Checkout</button>
+        <button className="checkout-btn" onClick={e => props.goToCheckout()}>Checkout</button>
       </section>
     )
 }

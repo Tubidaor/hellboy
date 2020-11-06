@@ -1,0 +1,22 @@
+.checkout-main {
+  margin-top: 45px;
+  height: calc(100vh - 125px);
+}
+.checkout-h1-header {
+  top: 70px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  margin: 0px;
+  margin: 0px;
+}
+.checkout-h1-header h1 {
+  margin: 0px;
+}
+.checkout-btn {
+  display: block;
+}
+.order-summary-sec {
+  margin-top: 180px;
+  
+}

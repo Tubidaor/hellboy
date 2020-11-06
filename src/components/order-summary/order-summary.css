@@ -1,0 +1,15 @@
+.order-summary-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 70px;
+}
+.shipping-info-con {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 1.3rem;
+}
+.shipping-info-con p {
+  line-height: 1.3rem;
+}

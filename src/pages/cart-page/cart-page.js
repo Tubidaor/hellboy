@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CartItem from '../../components/cart-item/cart-item'
+// import { Link } from 'react-router-dom'
 import EmptyCart from '../../components/empty-cart/empty-cart'
 import './cart-page.css'
 import {tshirts} from '../../data'
@@ -7,6 +7,12 @@ import CartItems from '../../components/cart-item/cart-item'
 
 
 export default class CartPage extends Component {
+  static defaultProps = {
+    location: {},
+    history: {
+      push: () => {}
+    }
+  }
 
   constructor(props) {
     super(props)
@@ -57,7 +63,11 @@ export default class CartPage extends Component {
       })
     }
   }
-
+  goToCheckout = () => {
+    const { history } = this.props
+    const destination = "/checkout"
+    history.push(destination)
+  }
 
   render() {
     return (
@@ -66,9 +76,11 @@ export default class CartPage extends Component {
           <h1 className="cart-page-h1">
             Your Cart
           </h1>
-          <button className="checkout-btn">Checkout</button>
+          <button className="checkout-btn" onClick={e => this.goToCheckout()}>
+              Checkout
+          </button>
         </header>
-        <CartItems cart={this.state.cart}/>
+        <CartItems cart={this.state.cart} goToCheckout={this.goToCheckout}/>
         <EmptyCart></EmptyCart>
       </main>
     )
