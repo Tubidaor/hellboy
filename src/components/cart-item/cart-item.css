@@ -1,0 +1,32 @@
+.cart-item {
+  height: 150px;
+  width: 90%;
+  display: ablock;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.cart-item-img {
+  height: 100px;
+  width: 100px;
+}
+.cart-item-top-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.quantity-con {
+  display: flex;
+  flex-direction: row;
+}
+.checkout-btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: 50;
+  width: 70%;
+}
+.cart-item-sec {
+  margin-top: 70px;
+}

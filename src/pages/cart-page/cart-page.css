@@ -1,6 +1,13 @@
 .cart-page-main {
   margin-top: 75px;
+  height: calc(100vh - 125px);
+  overflow: scroll;
 }
 .cart-page-h1 {
   text-align: center;
+}
+.cart-page-header {
+  position: fixed;
+  width: 100%;
+  margin: 0px 0px
 }
