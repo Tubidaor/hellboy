@@ -1,0 +1,19 @@
+.shipping-details-sec {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+.shipping-option-con {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  padding-left: 20px;
+  border: 2px solid black;
+}
+.shipping-info-desc-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 50px;
+}

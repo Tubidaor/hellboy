@@ -1,6 +1,7 @@
 .checkout-main {
   margin-top: 45px;
-  height: calc(100vh - 125px);
+  /* height: calc(100vh - 70px); */
+  padding-bottom: 60px;
 }
 .checkout-h1-header {
   top: 70px;

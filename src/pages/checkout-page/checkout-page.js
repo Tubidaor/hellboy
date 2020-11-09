@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from '../../components/order-summary/order-summary'
+import PaymentInfo from '../../components/payment-info/payment-info'
 import ShippingAddress from '../../components/shipping-address/shipping-address'
+import ShippingDetails from '../../components/shipping-details/shipping-details'
 import './checkout-page.css'
 
 export default class CheckoutPage extends Component {
@@ -29,7 +31,12 @@ export default class CheckoutPage extends Component {
           <button className="checkout-btn" type="button">Place your order</button>
         </header>
         <OrderSummary bill={bill} customer={customer}/>
-        <ShippingAddress customer={customer}/>
+        <form>
+
+          <ShippingAddress customer={customer}/>
+          <PaymentInfo/>
+          <ShippingDetails/>
+        </form>
       </main>
     )
   }
