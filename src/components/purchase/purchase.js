@@ -3,10 +3,17 @@ import './purchase.css'
 
 export default class Purchase extends Component {
 
+  
+
   render() {
     const { product } = this.props
-    const { size } = this.props
-    console.log(size, product)
+    const {
+      size,
+      quantity,
+      handleProductAvailable,
+      handleProductNotAvailable
+    } = this.props
+    console.log(size, product, quantity)
     function renderQuantityAvailable(size) {
       console.log(size, product.sizes[size])
       let quantity = product.sizes[size]
@@ -17,16 +24,30 @@ export default class Purchase extends Component {
       const displayQuantityAvailable = options.map(option => 
         <option value={option}>{option}</option>
       )
-
+      if(quantity > 0) {
+        console.log('product should have updated')
+        handleProductAvailable()
+      } else if(quantity === 0) {
+        console.log('quantity is 0')
+        handleProductNotAvailable()
+      }
       return displayQuantityAvailable
     }
 
+    console.log(size)
     return (
       <section className="purchase-con">
         <div className="price-quantity-con">
           <span>Price: {product.price}</span>
           <span>
-            Quantity: <select>{renderQuantityAvailable(size)}</select>
+            Quantity:
+              <select
+                id="quantity-selection"
+                onChange={e => this.props.handleQuantityChange()}
+              > 
+                {quantity === 0 && <option value="0">0</option> }
+                {renderQuantityAvailable(size)}
+              </select>
           </span>
         </div>
         <div className="purchase-btn-con">

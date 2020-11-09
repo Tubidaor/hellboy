@@ -168,7 +168,7 @@ export const tshirts = [
       small: 5,
       medium: 5,
       large: 5,
-      xlarge: 5
+      xlarge: 0
     },
     src: {
       main: {

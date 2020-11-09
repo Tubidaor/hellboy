@@ -16,7 +16,8 @@ export default class ProductPage extends Component {
   state = {
     product: null,
     currentSize: 'null',
-    currentColor: 'main'
+    currentColor: 'main',
+    quantity: 0
   }
 
   componentDidMount()  {
@@ -30,7 +31,9 @@ export default class ProductPage extends Component {
   // findProduct = (products, productId) => {
   //   return products.filter(product => product.id == productId)[0]
   // }
-
+  componentDidUpdate() {
+    console.log(this.state.quantity)
+  }
   handleSizeChange = (size) => {
     this.setState({
       currentSize: size
@@ -44,7 +47,8 @@ export default class ProductPage extends Component {
     const itemToAdd = {
       id: product.id,
       size: this.state.size,
-      color: this.state.currentColor
+      color: this.state.currentColor,
+      quantity: this.state.quantity
     }
     // const addToCart = produ
     // ProdServices.addToCart
@@ -54,6 +58,30 @@ export default class ProductPage extends Component {
       currentColor: color
     })
   }
+  handleQuantityChange = () => {
+    const quantity = document.getElementById('quantity-selection')
+    console.log(quantity.value)
+    this.setState({
+      quantity: quantity.value
+    })
+  }
+  handleProductAvailable = () => {
+      console.log('product updating started')
+    if(this.state.quantity === 0) {
+      console.log('product is updating')
+      this.setState({
+        quantity: 1
+      })
+    }
+  }
+  handleProductNotAvailable = () => {
+    if(this.state.quantity > 0) {
+      this.setState({
+        quantity: 0
+      })
+    }
+  }
+
   render() {
     // const allProducts = tshirts
     // const product = this.findProduct(allProducts, productId)
@@ -78,8 +106,12 @@ export default class ProductPage extends Component {
           product &&
           <Purchase
             product={product}
+            quantity={this.state.quantity}
             size={this.state.currentSize}
             addToCart={this.addToCart}
+            handleQuantityChange={this.handleQuantityChange}
+            handleProductAvailable={this.handleProductAvailable}
+            handleProductNotAvailable={this.handleProductNotAvailable}
           />
         }
         <ProductMiscInfo />
