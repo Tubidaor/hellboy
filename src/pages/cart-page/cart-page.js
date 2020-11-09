@@ -80,8 +80,11 @@ export default class CartPage extends Component {
               Checkout
           </button>
         </header>
-        <CartItems cart={this.state.cart} goToCheckout={this.goToCheckout}/>
+        <CartItems cart={this.state.cart}/>
         <EmptyCart></EmptyCart>
+        <button className="checkout-btn" onClick={e => this.goToCheckout()}>
+              Checkout
+        </button>
       </main>
     )
   }

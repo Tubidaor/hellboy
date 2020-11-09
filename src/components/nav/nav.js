@@ -1,6 +1,8 @@
 // import React from 'react'
 import { Link } from 'react-router-dom'
 import './nav.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookSquare, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 export default function Nav() {
   return (
@@ -25,14 +27,14 @@ export default function Nav() {
       </div>
       <div className="social-ul-con">
         <ul className="social-ul">
-          <li>
-            <a>Twitter Icon</a>
+          <li className="twitter">
+            <a><FontAwesomeIcon icon={faTwitter}/></a>
           </li>
-          <li>
-            <a>IG Icon</a>
+          <li className="instagram">
+            <a><FontAwesomeIcon icon={faInstagram}/></a>
           </li>
-          <li>
-            <a>FB Icon</a>
+          <li className="facebook">
+            <a><FontAwesomeIcon icon={faFacebookSquare}/></a>
           </li>
         </ul>
       </div>

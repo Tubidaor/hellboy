@@ -3,6 +3,18 @@ import ShopWindow from '../../components/shop-window/shop-window'
 import './home-page.css'
 
 export default class HomePage extends Component {
+  static defaultProps = {
+    location: {},
+    history: {
+      push: () => {}
+    }
+  }
+
+  goToProductDetail = (productId) => {
+    const {history} = this.props
+    const destination = `/products/${productId}`
+    history.push(destination)
+  }
 
   render() {
     return(
@@ -18,7 +30,7 @@ export default class HomePage extends Component {
           <video className="main-vid" controls>
             <source src="https://www.youtube.com/watch?v=Xq7ibY2sp_Q" type="video/mp4"></source>
           </video> */}
-          <ShopWindow/>
+          <ShopWindow goToProductDetail={this.goToProductDetail}/>
         </div>
       </main>
     )

@@ -30,7 +30,7 @@ export default class Purchase extends Component {
           </span>
         </div>
         <div className="purchase-btn-con">
-          <button className="add-to-cart-btn">Add to Cart</button>
+          <button className="add-to-cart-btn" onClick={e => this.props.addToCart()}>Add to Cart</button>
           <button className="buy-now-btn">Buy Now</button>  
         </div>
       </section>

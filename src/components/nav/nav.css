@@ -42,3 +42,25 @@ ul > li {
   top: 0px;
   right: 0px;
 }
+.twitter {
+  color: #4c6ef5;
+}
+.instagram {
+  background: #d6249f;
+  background: linear-gradient(45DEG, #405de6, #5851db, #833ab4, #C13584, #E1306c, #FD1D1D);
+  border-radius: 4px;
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  text-align: center
+}
+li > a {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.facebook {
+  color: #3a5794;
+  background-color: white;
+}

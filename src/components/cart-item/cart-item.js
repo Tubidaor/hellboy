@@ -36,7 +36,6 @@ export default function CartItems(props) {
         <ul className="cart-item-ul">
           {displayItemSummary}
         </ul>
-        <button className="checkout-btn" onClick={e => props.goToCheckout()}>Checkout</button>
       </section>
     )
 }

@@ -17,6 +17,9 @@ export default class ShopWindow extends Component {
     }
   }
 
+  componentDidMount() {
+ 
+  }
   imgLeft = () => {
     let currentIndex = this.state.index
     const totalShirts = this.state.tshirts
@@ -43,16 +46,22 @@ export default class ShopWindow extends Component {
       index: currentIndex
     })
   }
+
+
   render() {
 
-
-    const shirts = this.state.tshirts
-    const index = this.state.index
-    console.log(index)
+    const shirt = this.state.tshirts
+    const { index } = this.state
     return(
       <div className="window-shop-con">
         {/* {displayTshirts} */}
-        <img className="window-img" src={shirts[index].src.main.picture1} alt={shirts[index].description} />
+        <img
+          id={shirt[index].id}
+          className="window-img"
+          src={shirt[index].src.main.picture1}
+          alt={shirt[index].description}
+          onClick={e => this.props.goToProductDetail(shirt[index].id)}
+        />
         <div className="left-arrow" onClick={this.imgLeft}>
           <FontAwesomeIcon className="chevron-left" icon={faChevronLeft}/>
         </div>
