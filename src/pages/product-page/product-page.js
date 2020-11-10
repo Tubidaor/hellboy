@@ -43,15 +43,15 @@ export default class ProductPage extends Component {
   addToCart = () => {
     console.log('added to cart')
     const { product } = this.state
-    console.log(product)
     const itemToAdd = {
       id: product.id,
-      size: this.state.size,
+      size: this.state.currentSize,
       color: this.state.currentColor,
-      quantity: this.state.quantity
+      quantity: this.state.quantity,
+      price: product.price
     }
     // const addToCart = produ
-    // ProdServices.addToCart
+    ProdServices.addToCart(itemToAdd)
   }
   handleColorChange = (color) => {
     this.setState({

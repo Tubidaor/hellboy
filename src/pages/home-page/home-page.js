@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ShopWindow from '../../components/shop-window/shop-window'
 import './home-page.css'
-
+import { ProdServices } from '../../services/product-services'
 export default class HomePage extends Component {
   static defaultProps = {
     location: {},
@@ -9,7 +9,10 @@ export default class HomePage extends Component {
       push: () => {}
     }
   }
-
+  componentDidMount() {
+    ProdServices.createCart()
+    console.log(ProdServices.getCartFromSessionStorage())
+  }
   goToProductDetail = (productId) => {
     const {history} = this.props
     const destination = `/products/${productId}`
