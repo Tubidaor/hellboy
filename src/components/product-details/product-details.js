@@ -7,21 +7,25 @@ export default class ProductDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mainImage: null,
+      // mainImage: null,
       currentColor: 'main',
-      colors: [],
+      // colors: [],
       size: 'Please Select Size'
     }
   }
   componentDidMount() {
-    const { product } = this.props
-    const availColors = Object.keys(product.src)
-    if(this.state.mainImage === null) {
-      this.setState({mainImage: product.src.main.picture1, colors: availColors})
-    }
-    console.log(product.id)
+    // const { product } = this.props
+    // const availColors = Object.keys(product.src)
+    // if(this.state.mainImage === null) {
+    //   this.setState({mainImage: product.src.main.picture1, colors: availColors})
+    // }
+    // console.log(product.id)
         // this.imageZoom("main-img", 'myresult')
 
+  }
+  componentDidUpdate() {
+    const imgSrc = this.state.mainImage
+    // this.props.getMainImg(imgSrc)
   }
   componentWillUnmount() {
     this.setState({
@@ -29,21 +33,16 @@ export default class ProductDetails extends Component {
     })
   }
 
-  handleImgChange = (mainImage) => {
-    console.log('pic changed')
-    this.setState({
-      mainImage
-    })
-  }
+ 
 
   colorChange = (color) => {
     this.props.handleColorChange(color)
   }
 
-  handleImgAndMainChange = (color, mainImage) => {
-      this.setState({mainImage})
-    return color
-  }
+  // handleImgAndMainChange = (color, mainImage) => {
+  //     this.setState({mainImage})
+  //   return color
+  // }
 
   handleSizeChange = (size) => {
     this.setState({size: "Size:" + " " + size}, this.props.handleSizeChange(size))
@@ -105,9 +104,7 @@ export default class ProductDetails extends Component {
   } 
 
   render() {
-    const { product, currentColor } = this.props
-    const  { mainImage, colors } = this.state
-    const handleImgChange = this.handleImgChange
+    const { product, currentColor, handleImgChange, mainImage, colors } = this.props
     
     function mainImages() {
       const mainImages = product.src.main
@@ -209,36 +206,32 @@ export default class ProductDetails extends Component {
           <div className="colors-preview">
             { 
               colors.includes('main') &&
-              <div className='preview-main' onClick={e => (this.colorChange('main'), this.handleImgChange(mainMain()))}>
+              <div className='preview-main' onClick={e => (this.colorChange('main'), handleImgChange(mainMain()))}>
               </div>
             }
             { 
               colors.includes('black') &&
-              <div className='preview-black' onClick={e => (this.colorChange('black'), this.handleImgChange(blackMain()))}>
+              <div className='preview-black' onClick={e => (this.colorChange('black'), handleImgChange(blackMain()))}>
               </div>
             }
             {
               colors.includes('gray') &&
-              <div className='preview-gray' onClick={e => (this.colorChange('gray'), this.handleImgChange(grayMain()))}>
+              <div className='preview-gray' onClick={e => (this.colorChange('gray'), handleImgChange(grayMain()))}>
               </div>
             }
             {
               colors.includes('blue') &&
-              <div className='preview-blue' onClick={e => (this.colorChange('blue'), this.handleImgChange(blueMain()))}>
+              <div className='preview-blue' onClick={e => (this.colorChange('blue'), handleImgChange(blueMain()))}>
               </div>
             }
             {
               colors.includes('orange') &&
-              <div className='preview-orange' onClick={e => (this.colorChange('orange'), this.handleImgChange(orangeMain()))}>
+              <div className='preview-orange' onClick={e => (this.colorChange('orange'), handleImgChange(orangeMain()))}>
               </div>
             }
           </div>
           <div className="sizes-con">
             {sizes && <span className="size-display">{this.state.size}</span>}
-            {/* <div className='size-small'></div>
-            <div className='size-medium'></div>
-            <div className='size-large'></div>
-            <div className='size-xlarge'></div> */}
             <div className="size-sel-con">
               {displaySizes}
             </div>

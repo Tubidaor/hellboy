@@ -15,7 +15,9 @@ export default class ProductPage extends Component {
   }
   state = {
     product: null,
-    currentSize: 'null',
+    mainImage: null,
+    colors: [],
+    currentSize: null,
     currentColor: 'main',
     quantity: 0
   }
@@ -24,13 +26,15 @@ export default class ProductPage extends Component {
     const { productId } = this.props.match.params
     console.log(ProdServices.getProduct(productId))
     const product = ProdServices.getProduct(productId)
+    const availColors = Object.keys(product.src)
+  
     this.setState({
-      product
+      product,
+      mainImage: product.src.main.picture1,
+      colors: availColors
     }, console.log(product))
   }
-  // findProduct = (products, productId) => {
-  //   return products.filter(product => product.id == productId)[0]
-  // }
+
   componentDidUpdate() {
     console.log(this.state.quantity)
   }
@@ -49,8 +53,8 @@ export default class ProductPage extends Component {
       color: this.state.currentColor,
       quantity: this.state.quantity,
       price: product.price,
-      src: '',
-      description: ''
+      src: this.state.mainImage,
+      description: product.description
     }
 
     ProdServices.addToCart(itemToAdd)
@@ -83,18 +87,20 @@ export default class ProductPage extends Component {
       })
     }
   }
-
-  handleImgChange(image) {
+  handleImgChange = (mainImage) => {
+    console.log('pic changed')
     this.setState({
-      currentImage: image
+      mainImage
     })
   }
+
+
   render() {
     // const allProducts = tshirts
     // const product = this.findProduct(allProducts, productId)
     // console.log(product, this.state.currentSize)
     // console.log(allProducts[1].id == productId)
-    const { product, currentColor } = this.state
+    const { product, currentColor, mainImage, colors } = this.state
 
     return (
       <main className="product-page-main">
@@ -104,8 +110,12 @@ export default class ProductPage extends Component {
           <ProductDetails
             product={product}
             currentColor={currentColor}
+            mainImage={mainImage}
+            colors={colors}
             handleSizeChange={this.handleSizeChange}
             handleColorChange={this.handleColorChange}
+            handleImgChange={this.handleImgChange}
+            getMainImg={this.getMainImg}
           />
         }
         <SizingChart/>
