@@ -48,9 +48,11 @@ export default class ProductPage extends Component {
       size: this.state.currentSize,
       color: this.state.currentColor,
       quantity: this.state.quantity,
-      price: product.price
+      price: product.price,
+      src: '',
+      description: ''
     }
-    // const addToCart = produ
+
     ProdServices.addToCart(itemToAdd)
   }
   handleColorChange = (color) => {
@@ -82,6 +84,11 @@ export default class ProductPage extends Component {
     }
   }
 
+  handleImgChange(image) {
+    this.setState({
+      currentImage: image
+    })
+  }
   render() {
     // const allProducts = tshirts
     // const product = this.findProduct(allProducts, productId)
