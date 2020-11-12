@@ -13,10 +13,13 @@ export const ProdServices = {
   createCart() {
     window.sessionStorage.setItem(config.CART, JSON.stringify({items: []}))
   },
+  saveCart(cart) {
+    window.sessionStorage.setItem(config.CART, JSON.stringify({items: cart}))
+  },
   addToCart(newProduct) {
     'adding to cart'
     console.log(ProdServices.getCartFromSessionStorage()?true:false)
-    if(!ProdServices.getCartFromSessionStorage) {
+    if(!ProdServices.getCartFromSessionStorage()) {
       ProdServices.createCart()
     }
     const cart = ProdServices.getCartFromSessionStorage()
@@ -33,6 +36,36 @@ export const ProdServices = {
   },
   emptyCart() {
     window.sessionStorage.clear(config.CART)
+  },
+  addToQuantity() {
+    // const currentQuantity
+  }
+}
+
+export const ShippingServices = {
+  getRates() {
+    const userId = "407NA0006401"
+    const url = "https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML="
+    const xml = `<RateV4Request USERID="${userId}"><Revision>2</Revision>\
+      <Package ID="0"><Service>PRIORITY</Service>\
+      <ZipOrigination>22201</ZipOrigination>\
+      <ZipDestination>26301</ZipDestination><Pounds>8</Pounds><Ounces>2</Ounces>\
+      <Container></Container><Width></Width><Length></Length><Height></Height>\
+      <Girth></Girth><Machinable>TRUE</Machinable></Package>`
+
+    return fetch(url+xml, {
+      method: "GET",
+      headers: {
+        "content-type": "text/xml",
+        "Origin": "lvh.me",
+        "Allow-Access-Control-Origin": "*"
+      }
+    })
+    .then(res => 
+      (!res.ok)
+      ? res.json().then(e => Promise.reject(e))
+      : res.json()
+    )
   }
 }
 

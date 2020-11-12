@@ -14,19 +14,20 @@ export default function CartItems(props) {
         <li className="cart-item">
           <div className="cart-item-top-con">
             <div className="cart-img-con">
-              <img className="cart-item-img" src={item.itemSrc}/>
+              <img className="cart-item-img" src={item.src}/>
             </div>
             <div className="cart-info-con">
-              <p>{item.itemDesc}</p>
-              <div><span>Price:</span>{item.itemPrice}</div>
-              <div><span>Size:</span>{item.itemSize}</div>
-              {item.itemColor && <div><span>Color:</span>{item.itemColor}</div>}
+              <p>{item.description}</p>
+              <div><span>Price:</span>{item.price}</div>
+              <div><span>Size:</span>{item.size}</div>
+              {item.color && <div><span>Color:</span>{item.color}</div>}
             </div>
           </div>
           <div className="quantity-con">
-            <button>Del</button>
+            <button onClick={e => props.subtractQuantity(cart.indexOf(item))}>-</button>
             <div>{item.quantity}</div>
-            <button>+</button>
+            <button onClick={e => props.addQuantity(cart.indexOf(item))}>+</button>
+            <button onClick={e => props.deleteItem(cart.indexOf(item))}>Del</button>
           </div>
         </li>
       )}

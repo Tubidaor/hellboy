@@ -6,7 +6,7 @@ import PaymentInfo from '../../components/payment-info/payment-info'
 import ShippingAddress from '../../components/shipping-address/shipping-address'
 import ShippingDetails from '../../components/shipping-details/shipping-details'
 import './checkout-page.css'
-import { tshirts } from '../../data'
+import { ProdServices, ShippingServices } from '../../services/product-services'
 
 export default class CheckoutPage extends Component {
   static defaultProps = {
@@ -19,52 +19,23 @@ export default class CheckoutPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cart: []
+      cart: [],
+      shippingOption: 'Standard'
     }
   }
 
   componentDidMount() {
-    console.log(this.state.cart == [])
-    console.log([], this.state.cart, this.state.cart.length)
-    //if there is session storage, load it, otherwise, dont. if empty display nothing in cart
-    const product = tshirts
-    const cartItems = [
-      {
-        itemId: product[0].id,
-        quantity: 1,
-        itemSrc: product[0].src.black.picture1,
-        itemDesc: product[0].description,
-        itemPrice: product[0].price,
-        itemColor: 'black',
-        itemSize: 'small'
-      },
-      {
-        itemId: product[3].id,
-        quantity: 1,
-        itemSrc: product[3].src.blue.picture1,
-        itemDesc: product[3].description,
-        itemPrice: product[3].price,
-        itemColor: 'blue',
-        itemSize: 'large'
-      },
-      {
-        itemId: product[2].id,
-        quantity: 2,
-        itemSrc: product[2].src.orange.picture1,
-        itemDesc: product[2].description,
-        itemPrice: product[2].price,
-        itemColor: 'orange',
-        itemSize: 'medium'
-      },
-    ]
-    if(this.state.cart.length === 0) {
+
+    const cart = ProdServices.getCartFromSessionStorage()
       console.log(this.state.cart)
       console.log('setting state')
       this.setState({
-        cart: cartItems
+        cart: cart.items
       })
-    }
+    ShippingServices.getRates()
+      .then(res => console.log(res))
   }
+
   
 
   render() {

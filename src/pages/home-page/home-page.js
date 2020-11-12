@@ -10,8 +10,8 @@ export default class HomePage extends Component {
     }
   }
   componentDidMount() {
-    ProdServices.createCart()
-    console.log(ProdServices.getCartFromSessionStorage())
+    // ProdServices.createCart()
+    // console.log(ProdServices.getCartFromSessionStorage())
   }
   goToProductDetail = (productId) => {
     const {history} = this.props
