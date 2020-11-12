@@ -266,7 +266,25 @@ const hours = [
 
 
 ]
-
+export const customer = {
+  user_id: "156151018",
+  first_name: "juan",
+  last_name: "baltazar",
+  address_line1: "26810 Alcott Ct",
+  address_line2: "",
+  city: "Stevenson Ranch",
+  state: "CA",
+  zip: "91381"
+}
+export const ccInfo = {
+  cc_id: "559asdfsdf",
+  cc_user_id: "156151018",
+  cc_number: "559309000038055",
+  cc_exp_date: "11/25",
+  cc_sec_code: "355"
+}
 export default {
-  tshirts
+  tshirts,
+  customer,
+  ccInfo
 }

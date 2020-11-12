@@ -1,4 +1,4 @@
-import { tshirts } from '../data'
+import { tshirts, customer, ccInfo } from '../data'
 import config from '../config'
 const convert = require('xml-js')
 
@@ -38,9 +38,7 @@ export const ProdServices = {
   emptyCart() {
     window.sessionStorage.clear(config.CART)
   },
-  addToQuantity() {
-    // const currentQuantity
-  }
+
 }
 
 export const ShippingServices = {
@@ -71,6 +69,14 @@ export const ShippingServices = {
   }
 }
 
+export const CustomerServices = {
+  getCustomerInfo() {
+    return customer
+  }
+}
+
 export default {
-  ProdServices
+  ProdServices,
+  ShippingServices,
+  CustomerServices
 }

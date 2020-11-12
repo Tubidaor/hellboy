@@ -6,7 +6,7 @@ import PaymentInfo from '../../components/payment-info/payment-info'
 import ShippingAddress from '../../components/shipping-address/shipping-address'
 import ShippingDetails from '../../components/shipping-details/shipping-details'
 import './checkout-page.css'
-import { ProdServices, ShippingServices } from '../../services/product-services'
+import { CustomerServices, ProdServices, ShippingServices } from '../../services/product-services'
 
 export default class CheckoutPage extends Component {
   static defaultProps = {
@@ -24,6 +24,8 @@ export default class CheckoutPage extends Component {
         pounds: 0,
         ounces: 0
       },
+      customer: {},
+      destinationZip: null,
       shippingOption: 'Standard'
     }
   }
@@ -36,29 +38,35 @@ export default class CheckoutPage extends Component {
       this.setState({
         cart: cart.items
       })
-    // ShippingServices.getRates()
-    //   .then(data => console.log(data))
-      // this.calculateWeight(0,2,4,1)
+    const customer = CustomerServices.getCustomerInfo()
+
+    this.setState({
+      customer
+    })
+    
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState.weight, this.state.weight)
     if(prevState.weight === this.state.weight) {
       this.calculateWeight(this.state.cart)
       
+    }
+    if(prevState.destinationZip === this.state.destinationZip) {
+      // ShippingServices.getRates()
+    //   .then(data => console.log(data))
+      // this.calculateWeight(0,2,4,1)
     }
   }
   calculatePoundsOunces = (weight) => {
     const totalOunces = weight.ounces
     const pounds = totalOunces / 16
     const ounces = Math.round(((pounds % 1) * 16), 1)
-    console.log(pounds, Math.round(pounds, 0), ounces.toFixed(4), ounces)
     const totalPounds = weight.pounds + Math.round(pounds,0)
     this.setState({
       weight: {
         pounds: totalPounds,
         ounces: ounces
       }
-    }, console.log(this.state.weight))
+    })
   }
 
   calculateWeight = (cart) => {
@@ -71,7 +79,6 @@ export default class CheckoutPage extends Component {
       const pounds = item.weight.pounds * item.quantity
       const ounces = item.weight.ounces * item.quantity
 
-      console.log(pounds, ounces)
       totalWeight = {
         pounds: totalWeight.pounds + pounds,
         ounces: totalWeight.ounces + ounces
@@ -81,18 +88,14 @@ export default class CheckoutPage extends Component {
   }
 
   render() {
-    const { cart } = this.state
-    const customer = {
-      firstName: 'Juan',
-      lastName: 'Baltazar',
-      address: '26810 Alcott Ct, Stevensons Ranch CA, 91381'
-    }
+    const { cart, customer } = this.state
+
     const bill = {
       pretax: 25,
       shipping: 5
     }
 
-    console.log(this.state.weight)
+    console.log(this.state.weight, this.state.customer)
     return (
       <main className="checkout-main">
         <header className="checkout-h1-header">

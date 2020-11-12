@@ -26,10 +26,10 @@ export default function OrderSummary(props) {
       <div className="shipping-info-con">
         <p>
           <span>Shipping to:</span>
-          {customer.firstName}{" "}{customer.lastName}
+          {customer.first_name}{" "}{customer.last_name}
         </p>
         <p>
-          {customer.address}
+          {customer.address_line1}
         </p>
         <p><span>Estimated Delivery:</span>{'TBD'}</p>
       </div>
