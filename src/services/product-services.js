@@ -1,5 +1,6 @@
 import { tshirts } from '../data'
 import config from '../config'
+const convert = require('xml-js')
 
 export const ProdServices = {
   getProduct(productId) {
@@ -43,28 +44,29 @@ export const ProdServices = {
 }
 
 export const ShippingServices = {
-  getRates() {
+  getRates(pounds, ounces, destinationZip) {
     const userId = "407NA0006401"
+    const originationZip = "91381"
+    const proxy = "https://cors-anywhere.herokuapp.com/"
     const url = "https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML="
     const xml = `<RateV4Request USERID="${userId}"><Revision>2</Revision>\
-      <Package ID="0"><Service>PRIORITY</Service>\
-      <ZipOrigination>22201</ZipOrigination>\
-      <ZipDestination>26301</ZipDestination><Pounds>8</Pounds><Ounces>2</Ounces>\
+      <Package ID="0"><Service>Online</Service>\
+      <ZipOrigination>${originationZip}</ZipOrigination>\
+      <ZipDestination>${destinationZip}</ZipDestination><Pounds>${pounds}</Pounds><Ounces>${ounces}</Ounces>\
       <Container></Container><Width></Width><Length></Length><Height></Height>\
-      <Girth></Girth><Machinable>TRUE</Machinable></Package>`
+      <Girth></Girth><Machinable>TRUE</Machinable></Package></RateV4Request>`
 
-    return fetch(url+xml, {
+    return fetch(`${proxy}${url}${xml}`, {
       method: "GET",
       headers: {
-        "content-type": "text/xml",
-        "Origin": "lvh.me",
-        "Allow-Access-Control-Origin": "*"
+        "Content-Type": "text/xml",
+        // "Access-Control-Allow-Origin": "http://localhost:3000"
       }
     })
-    .then(res => 
+    .then(res =>
       (!res.ok)
-      ? res.json().then(e => Promise.reject(e))
-      : res.json()
+      ? res.text().then(text => convert.xml2js(text, {compact: true, spaces: 0})).then(e => Promise.reject(e))
+      : res.text().then(text => convert.xml2js(text, {compact: true, spaces: 0}))
     )
   }
 }

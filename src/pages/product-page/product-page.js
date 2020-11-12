@@ -49,6 +49,8 @@ export default class ProductPage extends Component {
     const { product } = this.state
     const itemToAdd = {
       id: product.id,
+      product: product.product,
+      weight: product.weight,
       size: this.state.currentSize,
       color: this.state.currentColor,
       quantity: this.state.quantity,

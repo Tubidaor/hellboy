@@ -14,6 +14,10 @@ export const tshirts = [
     name: 't-shirt1',
     description: 'description for tshirt1',
     price: 25.00,
+    weight: {
+      pounds: 0,
+      ounces: 4.78
+    },
     sizes: {
       small: 5,
       medium: 5,
@@ -64,6 +68,10 @@ export const tshirts = [
     name: 't-shirt2',
     description: 'description for tshirt2',
     price: 25.00,
+    weight: {
+      pounds: 0,
+      ounces: 4.78
+    },
     sizes: {
       small: 5,
       medium: 5,
@@ -114,6 +122,10 @@ export const tshirts = [
     name: 't-shirt3',
     description: 'description for tshirt3',
     price: 25.00,
+    weight: {
+      pounds: 0,
+      ounces: 4.78
+    },
     sizes: {
       small: 5,
       medium: 5,
@@ -164,6 +176,10 @@ export const tshirts = [
     name: 't-shirt4',
     description: 'description for tshirt4',
     price: 25.00,
+    weight: {
+      pounds: 0,
+      ounces: 4.78
+    },
     sizes: {
       small: 5,
       medium: 5,
