@@ -1,4 +1,4 @@
-{
+export const uspsResponse = {
   "_declaration": {
     "_attributes": {
       "version": "1.0",
@@ -563,4 +563,8 @@
       ]
     }
   }
+}
+
+export default {
+  uspsResponse
 }

@@ -7,6 +7,7 @@ import ShippingAddress from '../../components/shipping-address/shipping-address'
 import ShippingDetails from '../../components/shipping-details/shipping-details'
 import './checkout-page.css'
 import { CustomerServices, ProdServices, ShippingServices } from '../../services/product-services'
+import  { uspsResponse }  from './jsonresponse.js'
 
 export default class CheckoutPage extends Component {
   static defaultProps = {
@@ -53,11 +54,12 @@ export default class CheckoutPage extends Component {
       const weight = this.calculateWeight(this.state.cart)
       const { destinationZip} = this.state
       console.log('this is the weight', weight.weight.pounds)
-      ShippingServices.getRates(weight.weight.pounds, weight.weight.ounces, destinationZip)
-      .then(data => {
-        let postage = data.RateV4Response.Package.Postage
+      // ShippingServices.getRates(weight.weight.pounds, weight.weight.ounces, destinationZip)
+      // .then(data => {
+        // let postage = data.RateV4Response.Package.Postage
+        let postage = uspsResponse.RateV4Response.Package.Postage
         let shippingOptions = []
-        console.log(data)
+        // console.log(data)
         postage.forEach(ship => {
           console.log(Object.values(ship.MailService))
           if(Object.values(ship.MailService).includes("First-Class&lt;sup&gt;&#8482;&lt;/sup&gt; Package Service")) {
@@ -66,11 +68,14 @@ export default class CheckoutPage extends Component {
           if(Object.values(ship.MailService).includes("Priority Mail Express 1-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Flat Rate Envelope")) {
             shippingOptions.push({twoDay: ship.CommercialRate._text})
           }
+          if(Object.values(ship.MailService).includes("Priority Mail 2-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Flat Rate Envelope")) {
+            shippingOptions.push({twoDayFlat: ship.CommercialRate._text})
+          }
         })
         this.setState({
           shippingOptions
         }, console.log('these are the rates', shippingOptions))
-      })
+      // })
     }
   }
   calculatePoundsOunces = (weight) => {
@@ -120,7 +125,7 @@ export default class CheckoutPage extends Component {
   }
   
   render() {
-    const { cart, customer } = this.state
+    const { cart, customer, shippingOptions } = this.state
 
     const bill = {
       pretax: 25,
@@ -141,7 +146,7 @@ export default class CheckoutPage extends Component {
 
           <ShippingAddress customer={customer}/>
           <PaymentInfo/>
-          <ShippingDetails/>
+          <ShippingDetails shippingOptions={shippingOptions}/>
           <CartItems cart={cart}/>
           <button className="checkout-btn" type="button">Place your order</button>
 
