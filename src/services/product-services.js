@@ -43,6 +43,7 @@ export const ProdServices = {
 
 export const ShippingServices = {
   getRates(pounds, ounces, destinationZip) {
+    console.log('getting rates', pounds, ounces, destinationZip)
     const userId = "407NA0006401"
     const originationZip = "91381"
     const proxy = "https://cors-anywhere.herokuapp.com/"

@@ -26,34 +26,51 @@ export default class CheckoutPage extends Component {
       },
       customer: {},
       destinationZip: null,
-      shippingOption: 'Standard'
+      shippingOption: 'Standard',
+      standardRate: null,
+      priorityRate: null,
+      shippingOptions: []
     }
   }
 
   componentDidMount() {
 
     const cart = ProdServices.getCartFromSessionStorage()
-      console.log(this.state.cart)
-      console.log('setting state')
       this.setState({
         cart: cart.items
       })
     const customer = CustomerServices.getCustomerInfo()
 
     this.setState({
-      customer
+      customer,
+      destinationZip: customer.zip
     })
     
   }
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.weight === this.state.weight) {
-      this.calculateWeight(this.state.cart)
-      
-    }
-    if(prevState.destinationZip === this.state.destinationZip) {
-      // ShippingServices.getRates()
-    //   .then(data => console.log(data))
-      // this.calculateWeight(0,2,4,1)
+    if(prevState.destinationZip !== this.state.destinationZip) {
+      console.log('calculating weight')
+      const weight = this.calculateWeight(this.state.cart)
+      const { destinationZip} = this.state
+      console.log('this is the weight', weight.weight.pounds)
+      ShippingServices.getRates(weight.weight.pounds, weight.weight.ounces, destinationZip)
+      .then(data => {
+        let postage = data.RateV4Response.Package.Postage
+        let shippingOptions = []
+        console.log(data)
+        postage.forEach(ship => {
+          console.log(Object.values(ship.MailService))
+          if(Object.values(ship.MailService).includes("First-Class&lt;sup&gt;&#8482;&lt;/sup&gt; Package Service")) {
+            shippingOptions.push({standard: ship.CommercialRate._text})
+          }
+          if(Object.values(ship.MailService).includes("Priority Mail Express 1-Day&lt;sup&gt;&#8482;&lt;/sup&gt; Flat Rate Envelope")) {
+            shippingOptions.push({twoDay: ship.CommercialRate._text})
+          }
+        })
+        this.setState({
+          shippingOptions
+        }, console.log('these are the rates', shippingOptions))
+      })
     }
   }
   calculatePoundsOunces = (weight) => {
@@ -67,6 +84,12 @@ export default class CheckoutPage extends Component {
         ounces: ounces
       }
     })
+    return {
+      weight: {
+        pounds: totalPounds,
+        ounces: ounces
+      }
+    }
   }
 
   calculateWeight = (cart) => {
@@ -84,9 +107,18 @@ export default class CheckoutPage extends Component {
         ounces: totalWeight.ounces + ounces
       }
     })
-    this.calculatePoundsOunces(totalWeight)
+    return this.calculatePoundsOunces(totalWeight)
   }
 
+  calculateTotalBeforeShipping = (cart) => {
+    let sum = 0
+    cart.forEach(item => {
+      const totalSale = item.price * item.quantity
+      sum = sum + totalSale
+    });
+    return sum
+  }
+  
   render() {
     const { cart, customer } = this.state
 
@@ -94,8 +126,7 @@ export default class CheckoutPage extends Component {
       pretax: 25,
       shipping: 5
     }
-
-    console.log(this.state.weight, this.state.customer)
+    console.log(this.calculateTotalBeforeShipping(cart))
     return (
       <main className="checkout-main">
         <header className="checkout-h1-header">

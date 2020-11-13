@@ -274,7 +274,7 @@ export const customer = {
   address_line2: "",
   city: "Stevenson Ranch",
   state: "CA",
-  zip: "91381"
+  zip: "10001"
 }
 export const ccInfo = {
   cc_id: "559asdfsdf",
