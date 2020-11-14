@@ -27,9 +27,7 @@ export default class CheckoutPage extends Component {
       },
       customer: {},
       destinationZip: null,
-      shippingOption: 'Standard',
-      standardRate: null,
-      priorityRate: null,
+      shippingRate: 0,
       shippingOptions: []
     }
   }
@@ -61,7 +59,7 @@ export default class CheckoutPage extends Component {
         let shippingOptions = []
         // console.log(data)
         postage.forEach(ship => {
-          console.log(Object.values(ship.MailService))
+          // console.log(Object.values(ship.MailService))
           if(Object.values(ship.MailService).includes("First-Class&lt;sup&gt;&#8482;&lt;/sup&gt; Package Service")) {
             shippingOptions.push({standard: ship.CommercialRate._text})
           }
@@ -72,8 +70,17 @@ export default class CheckoutPage extends Component {
             shippingOptions.push({twoDayFlat: ship.CommercialRate._text})
           }
         })
+        let shippingRate
+        for(let i = 0; i < shippingOptions.length; i++) {
+          if(Object.keys(shippingOptions[i]).includes("standard")) {
+            shippingRate = Object.values(shippingOptions[i])
+          } else if(Object.keys(shippingOptions[i]).includes("twoDayFlat")) {
+            shippingRate = Object.values(shippingOptions[i])
+          }
+        }
         this.setState({
-          shippingOptions
+          shippingOptions,
+          shippingRate
         }, console.log('these are the rates', shippingOptions))
       // })
     }
@@ -124,14 +131,42 @@ export default class CheckoutPage extends Component {
     return sum
   }
   
+  handleOptionChange = () => {
+    const option = document.getElementsByName('shipping-option')
+    let rate
+    console.log(option[0].checked, option[1].checked, option[2].checked)
+    for(let i = 0; i < option.length; i++) {
+      if(option[i].checked) {
+        rate = option[i].value
+        console.log(option[i])
+      }
+    }
+    console.log(rate)
+    this.setState({
+      shippingRate: rate
+    }, console.log(rate))
+  }
+   selectionShippingOption = () => {
+    const twoDay = document.getElementById('shipping-twoDay')
+    const twoDayFlat = document.getElementById('shipping-twoDayFlat')
+    const standard = document.getElementById('shipping-standard')
+    console.log(twoDay, twoDayFlat, standard)
+    if(standard) {
+      standard.checked = true
+    } else if (twoDayFlat) {
+      twoDayFlat.checked = true
+    } else if (twoDay) {
+      twoDay.checked = true
+    }
+  }
   render() {
-    const { cart, customer, shippingOptions } = this.state
+    const { cart, customer, shippingOptions, shippingRate } = this.state
 
     const bill = {
       pretax: 25,
       shipping: 5
     }
-    console.log(this.calculateTotalBeforeShipping(cart))
+
     return (
       <main className="checkout-main">
         <header className="checkout-h1-header">
@@ -141,12 +176,12 @@ export default class CheckoutPage extends Component {
           </p>
           <button className="checkout-btn" type="button">Place your order</button>
         </header>
-        <OrderSummary bill={bill} customer={customer}/>
+        <OrderSummary bill={bill} customer={customer} shippingRate={shippingRate}/>
         <form>
 
           <ShippingAddress customer={customer}/>
           <PaymentInfo/>
-          <ShippingDetails shippingOptions={shippingOptions}/>
+          <ShippingDetails shippingOptions={shippingOptions} handleOptionChange={this.handleOptionChange}/>
           <CartItems cart={cart}/>
           <button className="checkout-btn" type="button">Place your order</button>
 

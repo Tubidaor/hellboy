@@ -3,13 +3,29 @@ import './shipping-details.css'
 
 export default class ShippingDetails extends Component {
 
-  render() {
-    const { shippingOptions } = this.props
-    // console.log('dates', date, new Date(date.setDate(date.getDate() + 1)).toLocaleDateString('en-US', dateOptions))
+  componentDidUpdate() {
+    this.selectionShippingOption()
+  }
 
+  selectionShippingOption = () => {
+    const twoDay = document.getElementById('shipping-twoDay')
+    const twoDayFlat = document.getElementById('shipping-twoDayFlat')
+    const standard = document.getElementById('shipping-standard')
+    if(standard) {
+      standard.setAttribute("checked", "checked")
+    } else if (twoDayFlat) {
+      twoDayFlat.setAttribute("checked", "checked")
+    } else if (twoDay) {
+      twoDay.setAttribute("checked", "checked")
+    }
+  }
+
+  render() {
+    const { shippingOptions, handleOptionChange } = this.props
     const displayOptions = shippingOptions.map(option => {
       const deliveryType = Object.keys(option)[0]
-      const price = Object.keys(option)
+      const price = Object.values(option)
+      console.log(price)
       const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
       const deliveryDate = () => {
         const date = new Date(Date.now())              
@@ -57,11 +73,17 @@ export default class ShippingDetails extends Component {
           return "2-6 Day Standard Delivery"
         }
       }
-      console.log(deliveryType[0], deliveryDate(deliveryType))
+      
       return (
         <div className="shipping-option-con">
           <label htmlFor={`shipping-${deliveryType}`}></label>
-          <input id={`shipping-${deliveryType}`} type="radio" name="shipping-option" value={`${price}`}/>
+          <input 
+            id={`shipping-${deliveryType}`}
+            type="radio"
+            name="shipping-option"
+            value={`${price}`}
+            onChange={e => handleOptionChange()}
+          />
           <div className="shipping-info-desc-con">
             <span>{deliveryDate()}</span>
             <span>{deliveryDesc()}</span>
@@ -69,37 +91,9 @@ export default class ShippingDetails extends Component {
         </div>
       )
     })
-    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
- 
-    let date = new Date(Date.now())
-
 
     return (
       <section className="shipping-details-sec">
-        {/* <div className="shipping-option-con">
-          <label htmlFor="shipping-two-day"></label>
-          <input id="shipping-two-day" type="radio" id="shipping-two-day" name="shipping-option" value="1"/>
-          <div className="shipping-info-desc-con">
-            <span>Wednesday, Nov 11</span>
-            <span>Two day shipping</span>
-          </div>
-        </div>
-        <div className="shipping-option-con">
-          <label htmlFor="shipping-standard"></label>
-          <input id="shipping-two-day" type="radio" id="shipping-standard" name="shipping-option" value="2"/>
-          <div className="shipping-info-desc-con">
-            <span>Wednesday, Nov 17</span>
-            <span>Standard shipping</span>
-          </div>
-        </div>
-        <div className="shipping-option-con">
-          <label htmlFor="shipping-expedited"></label>
-          <input id="shipping-two-day" type="radio" id="shipping-expedited" name="shipping-option" value="1"/>
-          <div className="shipping-info-desc-con">
-            <span>Wednesday, Nov 12</span>
-            <span>Expedited shipping</span>
-          </div>
-        </div> */}
         {displayOptions}
       </section>
     )
