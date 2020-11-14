@@ -146,26 +146,32 @@ export default class CheckoutPage extends Component {
       shippingRate: rate
     }, console.log(rate))
   }
-   selectionShippingOption = () => {
-    const twoDay = document.getElementById('shipping-twoDay')
-    const twoDayFlat = document.getElementById('shipping-twoDayFlat')
-    const standard = document.getElementById('shipping-standard')
-    console.log(twoDay, twoDayFlat, standard)
-    if(standard) {
-      standard.checked = true
-    } else if (twoDayFlat) {
-      twoDayFlat.checked = true
-    } else if (twoDay) {
-      twoDay.checked = true
-    }
+  // selectionShippingOption = () => {
+  //   const twoDay = document.getElementById('shipping-twoDay')
+  //   const twoDayFlat = document.getElementById('shipping-twoDayFlat')
+  //   const standard = document.getElementById('shipping-standard')
+  //   console.log(twoDay, twoDayFlat, standard)
+  //   if(standard) {
+  //     standard.checked = true
+  //   } else if (twoDayFlat) {
+  //     twoDayFlat.checked = true
+  //   } else if (twoDay) {
+  //     twoDay.checked = true
+  //   }
+  // }
+  calculateTax = (taxes) => {
+    return taxes
+  }
+
+  totalBeforeTaxes = (sale, shipping) => {
+    return Number(sale) + Number(shipping)
+  }
+
+  orderTotal = (sale, shipping, taxes) => {
+    return Number(this.totalBeforeTaxes(sale, shipping)) + Number(this.calculateTax(taxes))
   }
   render() {
     const { cart, customer, shippingOptions, shippingRate } = this.state
-
-    const bill = {
-      pretax: 25,
-      shipping: 5
-    }
 
     return (
       <main className="checkout-main">
@@ -176,7 +182,14 @@ export default class CheckoutPage extends Component {
           </p>
           <button className="checkout-btn" type="button">Place your order</button>
         </header>
-        <OrderSummary bill={bill} customer={customer} shippingRate={shippingRate}/>
+        <OrderSummary
+          totalSale={this.calculateTotalBeforeShipping(cart)}
+          customer={customer}
+          shippingRate={shippingRate}
+          tax={this.calculateTax(0)}
+          totalBeforeTaxes={this.totalBeforeTaxes(this.calculateTotalBeforeShipping(cart), shippingRate)}
+          orderTotal={this.orderTotal(this.calculateTotalBeforeShipping(cart), shippingRate, this.calculateTax(0) )}
+        />
         <form>
 
           <ShippingAddress customer={customer}/>

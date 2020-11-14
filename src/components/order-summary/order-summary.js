@@ -1,23 +1,21 @@
 import './order-summary.css'
 
 export default function OrderSummary(props) {
-  const { bill, customer, shippingRate } = props
+  const {customer, shippingRate, totalSale, tax, totalBeforeTaxes, orderTotal } = props
 
-  function totalBeforeTaxes(pretax, shipping) {
-    return pretax + shipping
-  }
-  function calculateShipping(location, weight) {
-    // will need to find shipping data to calculate shipping weight and location
+  // function totalBeforeTaxes(pretax, shipping) {
+  //   return pretax + shipping
+  // }
+  // function calculateShipping(location, weight) {
+  //   // will need to find shipping data to calculate shipping weight and location
     
-    return location + weight
-  }
-  function calculateTax() {
-    return 0
-  }
-  function orderTotal(totalBeforeTaxes, taxes) {
-    const total = totalBeforeTaxes + taxes
-    return total
-  }
+  //   return location + weight
+  // }
+
+  // function orderTotal(totalBeforeTaxes, taxes) {
+  //   const total = totalBeforeTaxes + taxes
+  //   return total
+  // }
   //taxes have to be collected if revenue goes to a certain point thereby \
   //creating nexus. In california the threshold is 100k and evidentaly 500k as 
   // of 2019. Therefore no taxes need to be collected at this time.
@@ -42,7 +40,7 @@ export default function OrderSummary(props) {
                 <span>Items:</span>
               </td>
               <td>
-                {bill.pretax}
+                {totalSale}
               </td>
             </tr>
             <tr>
@@ -58,7 +56,7 @@ export default function OrderSummary(props) {
                 <span>Total before taxes:</span>
               </td>
               <td>
-                {totalBeforeTaxes(bill.pretax, calculateShipping(3,4))}
+                {totalBeforeTaxes}
               </td>
             </tr>
             <tr>
@@ -66,7 +64,7 @@ export default function OrderSummary(props) {
                 <span>Estimated Tax to be collected</span>
               </td>
               <td>
-                {calculateTax()}
+                {tax}
               </td>
             </tr>
             <tr>
@@ -74,7 +72,7 @@ export default function OrderSummary(props) {
                 <span>Order total:</span>
               </td>
               <td>
-                {orderTotal(totalBeforeTaxes(bill.pretax, calculateShipping(3,4)), calculateTax())}
+                {orderTotal}
               </td>
             </tr>
           </tbody>
