@@ -25,55 +25,7 @@ export default class ShippingDetails extends Component {
     const displayOptions = shippingOptions.map(option => {
       const deliveryType = Object.keys(option)[0]
       const price = Object.values(option)
-      console.log(price)
-      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-      const deliveryDate = () => {
-        const date = new Date(Date.now())              
-        let daysToAdd = 0
-        const shipDate = (daysToAdd) => {
-          return new Date(date.setDate(date.getDate() + daysToAdd))
-        }
-        let finalShipDate = (shipDate) => {
-          return new Date(shipDate).toLocaleDateString('en-US',  dateOptions)
-        }
-        if(deliveryType === "twoDay") {
-          daysToAdd = 1
-          if(shipDate(daysToAdd).getDay() === 6) {
-            daysToAdd = daysToAdd + 1
-            return finalShipDate(shipDate(daysToAdd))
-          }
-          return finalShipDate(shipDate(daysToAdd))
-        }
-        if(deliveryType === "twoDayFlat") {
-          daysToAdd = 2
-          if(shipDate(daysToAdd).getDay() === 6) {
-            daysToAdd = daysToAdd + 1
-            return finalShipDate(shipDate(daysToAdd))
-          }
-          return finalShipDate(shipDate(daysToAdd))
-        }
-        if(deliveryType === "standard") {
-          daysToAdd = 4
-          if(shipDate(daysToAdd).getDay() === 6) {
-            daysToAdd = daysToAdd + 1
-            return finalShipDate(shipDate(daysToAdd))
-          }
-          return finalShipDate(shipDate(daysToAdd))
-        }
-      }
-
-      const deliveryDesc = () => {
-        if(deliveryType === "twoDay") {
-          return "Two Day Delivery"
-        }
-        if(deliveryType === "twoDayFlat") {
-          return "2-4 Day Delivery"
-        }
-        if(deliveryType === "standard") {
-          return "2-6 Day Standard Delivery"
-        }
-      }
-      
+  
       return (
         <div className="shipping-option-con">
           <label htmlFor={`shipping-${deliveryType}`}></label>
@@ -82,16 +34,69 @@ export default class ShippingDetails extends Component {
             type="radio"
             name="shipping-option"
             value={`${price}`}
-            onChange={e => handleOptionChange()}
+            onChange={e => handleOptionChange(deliveryDate(deliveryType))}
           />
           <div className="shipping-info-desc-con">
-            <span>{deliveryDate()}</span>
-            <span>{deliveryDesc()}</span>
+            <span id={`span-${deliveryType}`}>{deliveryDate(deliveryType)}</span>
+            <span>{deliveryDesc(deliveryType)}</span>
           </div>
         </div>
       )
     })
 
+    function deliveryDate(deliveryType) {
+      let daysToAdd
+      const date = new Date(Date.now())              
+    
+      if(deliveryType === "twoDay") {
+        daysToAdd = 1
+        if(shipDate(daysToAdd).getUTCDay() == 0) {
+          daysToAdd = daysToAdd + 1
+        }
+        return finalShipDate(shipDate(daysToAdd))
+      }
+      if(deliveryType === "twoDayFlat") {
+        daysToAdd = 2
+        console.log('twodays', daysToAdd)
+        if(shipDate(daysToAdd).getUTCDay() === 0) {
+          daysToAdd = daysToAdd + 1
+        }
+        if(date.getUTCDay() === 6) {
+          daysToAdd = daysToAdd + 1
+        }
+        return finalShipDate(shipDate(daysToAdd))
+      }
+      if(deliveryType === "standard") {
+        daysToAdd = 4
+        if(shipDate(daysToAdd).getUTCDay() === 0) {
+          daysToAdd = daysToAdd + 1
+        }
+        if(shipDate(daysToAdd).getUTCDay() === 3) {
+          daysToAdd = daysToAdd + 1
+        }
+        return finalShipDate(shipDate(daysToAdd))
+      }
+    }
+    function deliveryDesc(deliveryType) {
+      if(deliveryType === "twoDay") {
+        return "Two Day Delivery"
+      }
+      if(deliveryType === "twoDayFlat") {
+        return "2-4 Day Delivery"
+      }
+      if(deliveryType === "standard") {
+        return "2-6 Day Standard Delivery"
+      }
+    }
+    function shipDate(daysToAdd) {
+      let date = new Date(Date.now())
+      console.log(date, daysToAdd)
+      return new Date(date.setDate(date.getDate() + daysToAdd))
+    }
+    function finalShipDate(shipDate) {
+      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+      return new Date(shipDate).toLocaleDateString('en-US',  dateOptions)
+    }
     return (
       <section className="shipping-details-sec">
         {displayOptions}

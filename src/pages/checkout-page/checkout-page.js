@@ -28,6 +28,7 @@ export default class CheckoutPage extends Component {
       customer: {},
       destinationZip: null,
       shippingRate: 0,
+      deliveryDate: undefined,
       shippingOptions: []
     }
   }
@@ -44,7 +45,7 @@ export default class CheckoutPage extends Component {
       customer,
       destinationZip: customer.zip
     })
-    
+    // this.setDefaultShipDate()
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevState.destinationZip !== this.state.destinationZip) {
@@ -83,6 +84,10 @@ export default class CheckoutPage extends Component {
           shippingRate
         }, console.log('these are the rates', shippingOptions))
       // })
+    }
+    if(this.state.deliveryDate === undefined) {
+      console.log('updatingshipdate')
+      this.setDefaultShipDate()
     }
   }
   calculatePoundsOunces = (weight) => {
@@ -131,20 +136,36 @@ export default class CheckoutPage extends Component {
     return sum
   }
   
-  handleOptionChange = () => {
+  handleOptionChange = (deliveryDate) => {
     const option = document.getElementsByName('shipping-option')
     let rate
     console.log(option[0].checked, option[1].checked, option[2].checked)
     for(let i = 0; i < option.length; i++) {
       if(option[i].checked) {
         rate = option[i].value
-        console.log(option[i])
       }
     }
-    console.log(rate)
     this.setState({
-      shippingRate: rate
-    }, console.log(rate))
+      shippingRate: rate,
+      deliveryDate
+    }, console.log(deliveryDate))
+  }
+
+  setDefaultShipDate = () => {
+    const twoDay = document.getElementById('span-twoDay')
+    const twoDayFlat = document.getElementById('span-twoDayFlat')
+    const standard = document.getElementById('span-standard')
+    let defaultDeliveryDate
+    if(standard) {
+      defaultDeliveryDate = standard.textContent
+    } else if(twoDayFlat) {
+      defaultDeliveryDate = twoDayFlat.textContent
+    } else if(twoDay) {
+      defaultDeliveryDate = twoDay.textContent
+    }
+    this.setState({
+      deliveryDate: defaultDeliveryDate
+    },console.log(defaultDeliveryDate))
   }
   // selectionShippingOption = () => {
   //   const twoDay = document.getElementById('shipping-twoDay')
@@ -171,7 +192,7 @@ export default class CheckoutPage extends Component {
     return Number(this.totalBeforeTaxes(sale, shipping)) + Number(this.calculateTax(taxes))
   }
   render() {
-    const { cart, customer, shippingOptions, shippingRate } = this.state
+    const { cart, customer, shippingOptions, shippingRate, deliveryDate } = this.state
 
     return (
       <main className="checkout-main">
@@ -189,12 +210,16 @@ export default class CheckoutPage extends Component {
           tax={this.calculateTax(0)}
           totalBeforeTaxes={this.totalBeforeTaxes(this.calculateTotalBeforeShipping(cart), shippingRate)}
           orderTotal={this.orderTotal(this.calculateTotalBeforeShipping(cart), shippingRate, this.calculateTax(0) )}
+          deliveryDate={deliveryDate}
         />
         <form>
 
           <ShippingAddress customer={customer}/>
           <PaymentInfo/>
-          <ShippingDetails shippingOptions={shippingOptions} handleOptionChange={this.handleOptionChange}/>
+          <ShippingDetails
+            shippingOptions={shippingOptions}
+            handleOptionChange={this.handleOptionChange}
+          />
           <CartItems cart={cart}/>
           <button className="checkout-btn" type="button">Place your order</button>
 

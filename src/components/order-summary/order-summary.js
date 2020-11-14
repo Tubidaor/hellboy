@@ -1,7 +1,15 @@
 import './order-summary.css'
 
 export default function OrderSummary(props) {
-  const {customer, shippingRate, totalSale, tax, totalBeforeTaxes, orderTotal } = props
+  const {
+    customer,
+    shippingRate,
+    totalSale,
+    tax,
+    totalBeforeTaxes,
+    orderTotal,
+    deliveryDate
+  } = props
 
   // function totalBeforeTaxes(pretax, shipping) {
   //   return pretax + shipping
@@ -19,7 +27,6 @@ export default function OrderSummary(props) {
   //taxes have to be collected if revenue goes to a certain point thereby \
   //creating nexus. In california the threshold is 100k and evidentaly 500k as 
   // of 2019. Therefore no taxes need to be collected at this time.
-  console.log(shippingRate)
   return (
     <section className="order-summary-sec">
       <div className="shipping-info-con">
@@ -30,7 +37,7 @@ export default function OrderSummary(props) {
         <p>
           {customer.address_line1}
         </p>
-        <p><span>Estimated Delivery:</span>{'TBD'}</p>
+        <p><span>Estimated Delivery:</span>{deliveryDate}</p>
       </div>
       <div>
         <table className="order-summary-table">
