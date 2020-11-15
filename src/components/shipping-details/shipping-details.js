@@ -45,37 +45,38 @@ export default class ShippingDetails extends Component {
     })
 
     function deliveryDate(deliveryType) {
-      let daysToAdd
       const date = new Date(Date.now())              
+      let daysToAdd = 0
+      // const deliveryDate = fi
     
       if(deliveryType === "twoDay") {
         daysToAdd = 1
-        if(shipDate(daysToAdd).getUTCDay() == 0) {
+        if(shipDate(daysToAdd).getDay() === 0) {
           daysToAdd = daysToAdd + 1
         }
-        return finalShipDate(shipDate(daysToAdd))
       }
       if(deliveryType === "twoDayFlat") {
         daysToAdd = 2
-        console.log('twodays', daysToAdd)
-        if(shipDate(daysToAdd).getUTCDay() === 0) {
+        if(shipDate(daysToAdd).getDay() === 0) {
           daysToAdd = daysToAdd + 1
         }
-        if(date.getUTCDay() === 6) {
+        if(date.getDay() === 6) {
           daysToAdd = daysToAdd + 1
         }
-        return finalShipDate(shipDate(daysToAdd))
       }
       if(deliveryType === "standard") {
         daysToAdd = 4
-        if(shipDate(daysToAdd).getUTCDay() === 0) {
+        if(shipDate(daysToAdd).getDay() === 0) {
           daysToAdd = daysToAdd + 1
         }
-        if(shipDate(daysToAdd).getUTCDay() === 3) {
+        if(shipDate(daysToAdd).getDay() === 3) {
           daysToAdd = daysToAdd + 1
         }
-        return finalShipDate(shipDate(daysToAdd))
       }
+      if(new Date(finalShipDate(shipDate(daysToAdd))).getDay() === 0) {
+        daysToAdd = daysToAdd + 1
+      }
+      return finalShipDate(shipDate(daysToAdd))
     }
     function deliveryDesc(deliveryType) {
       if(deliveryType === "twoDay") {
@@ -90,8 +91,8 @@ export default class ShippingDetails extends Component {
     }
     function shipDate(daysToAdd) {
       let date = new Date(Date.now())
-      console.log(date, daysToAdd)
-      return new Date(date.setDate(date.getDate() + daysToAdd))
+      date.setDate(date.getDate() + daysToAdd)
+      return new Date(date)
     }
     function finalShipDate(shipDate) {
       const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
