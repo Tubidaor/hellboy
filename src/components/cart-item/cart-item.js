@@ -24,10 +24,10 @@ export default function CartItems(props) {
             </div>
           </div>
           <div className="quantity-con">
-            <button onClick={e => props.subtractQuantity(cart.indexOf(item))}>-</button>
+            <button onClick={e => props.subtractQuantity(e, cart.indexOf(item))}>-</button>
             <div>{item.quantity}</div>
-            <button onClick={e => props.addQuantity(cart.indexOf(item))}>+</button>
-            <button onClick={e => props.deleteItem(cart.indexOf(item))}>Del</button>
+            <button onClick={e => props.addQuantity(e, cart.indexOf(item))}>+</button>
+            <button onClick={e => props.deleteItem(e, cart.indexOf(item))}>Del</button>
           </div>
         </li>
       )}

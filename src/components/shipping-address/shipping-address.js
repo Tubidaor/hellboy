@@ -7,10 +7,10 @@ export default function ShippingAddress(props) {
       <div className="shipping-address-info-con">
         <p>
           <span>Shipping to:</span>
-          {customer.firstName}{" "}{customer.lastName}
+          {customer.first_name}{" "}{customer.last_name}
         </p>
         <p>
-          {customer.address}
+          {customer.address_line1}
         </p>
       </div>
       <div className="shipping-address-info-con">

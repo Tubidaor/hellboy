@@ -34,25 +34,33 @@ export default class CheckoutPage extends Component {
   }
 
   componentDidMount() {
-
-    const cart = ProdServices.getCartFromSessionStorage()
-      this.setState({
-        cart: cart.items
-      })
+    
+    const cartItems = ProdServices.getCartFromSessionStorage()
+    
     const customer = CustomerServices.getCustomerInfo()
 
     this.setState({
       customer,
       destinationZip: customer.zip
     })
-    // this.setDefaultShipDate()
+
+    if(this.state.cart.length === 0) {
+      console.log(this.state.cart)
+      console.log('setting state')
+      this.setState({
+        cart: cartItems.items
+      }, console.log(cartItems.items))
+    }
   }
+  componentWillUnmount() {
+    ProdServices.emptyCart()
+    ProdServices.saveCart(this.state.cart)
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if(prevState.destinationZip !== this.state.destinationZip) {
-      console.log('calculating weight')
       const weight = this.calculateWeight(this.state.cart)
       const { destinationZip} = this.state
-      console.log('this is the weight', weight.weight.pounds)
       // ShippingServices.getRates(weight.weight.pounds, weight.weight.ounces, destinationZip)
       // .then(data => {
         // let postage = data.RateV4Response.Package.Postage
@@ -82,11 +90,10 @@ export default class CheckoutPage extends Component {
         this.setState({
           shippingOptions,
           shippingRate
-        }, console.log('these are the rates', shippingOptions))
+        })
       // })
     }
     if(this.state.deliveryDate === undefined) {
-      console.log('updatingshipdate')
       this.setDefaultShipDate()
     }
   }
@@ -167,19 +174,7 @@ export default class CheckoutPage extends Component {
       deliveryDate: defaultDeliveryDate
     },console.log(defaultDeliveryDate))
   }
-  // selectionShippingOption = () => {
-  //   const twoDay = document.getElementById('shipping-twoDay')
-  //   const twoDayFlat = document.getElementById('shipping-twoDayFlat')
-  //   const standard = document.getElementById('shipping-standard')
-  //   console.log(twoDay, twoDayFlat, standard)
-  //   if(standard) {
-  //     standard.checked = true
-  //   } else if (twoDayFlat) {
-  //     twoDayFlat.checked = true
-  //   } else if (twoDay) {
-  //     twoDay.checked = true
-  //   }
-  // }
+
   calculateTax = (taxes) => {
     return taxes
   }
@@ -191,6 +186,34 @@ export default class CheckoutPage extends Component {
   orderTotal = (sale, shipping, taxes) => {
     return Number(this.totalBeforeTaxes(sale, shipping)) + Number(this.calculateTax(taxes))
   }
+
+  addQuantity = (e, index) => {
+    e.preventDefault()
+    let {cart} = this.state
+    console.log(cart[index].quantity)
+    cart[index].quantity = ++cart[index].quantity
+    this.setState({
+      cart
+    }, console.log(cart[index].quantity))
+  }
+  subtractQuantity = (e, index) => {
+    e.preventDefault()
+    let {cart} = this.state
+    cart[index].quantity = --cart[index].quantity
+    this.setState({
+      cart
+    })
+  }
+  deleteItem = (e, productIndex) => {
+    e.preventDefault()
+    let {cart} = this.state
+    const afterDel = cart.filter(item => cart.indexOf(item) !== productIndex)
+    console.log(cart, afterDel)
+    this.setState({
+      cart: afterDel
+    })
+  }
+
   render() {
     const { cart, customer, shippingOptions, shippingRate, deliveryDate } = this.state
 
@@ -220,7 +243,12 @@ export default class CheckoutPage extends Component {
             shippingOptions={shippingOptions}
             handleOptionChange={this.handleOptionChange}
           />
-          <CartItems cart={cart}/>
+          <CartItems
+            cart={cart}
+            addQuantity={this.addQuantity}
+            subtractQuantity={this.subtractQuantity}
+            deleteItem={this.deleteItem}
+          />
           <button className="checkout-btn" type="button">Place your order</button>
 
         </form>

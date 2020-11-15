@@ -22,20 +22,20 @@ export default class CartPage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.cart == [])
-    console.log([], this.state.cart, this.state.cart.length)
     //if there is session storage, load it, otherwise, dont. if empty display nothing in cart
     const cartItems = ProdServices.getCartFromSessionStorage()
 
     if(this.state.cart.length === 0) {
       console.log(this.state.cart)
-      console.log('setting state')
+      console.log('setting state', cartItems.items)
       this.setState({
         cart: cartItems.items
-      }, console.log(this.state.cart))
+      }, console.log(cartItems.items))
     }
   }
+
   componentWillUnmount() {
+    console.log('unmounting')
     ProdServices.emptyCart()
     ProdServices.saveCart(this.state.cart)
   }
