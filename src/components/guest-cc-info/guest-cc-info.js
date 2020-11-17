@@ -1,7 +1,7 @@
 import ShippingAddress from '../shipping-address/shipping-address'
 import './guest-cc-info.css'
 import { MiscServices } from '../../services/misc-services'
-import ShippingAddressForm from '../guest-checkout-details/shipping-address'
+import ShippingAddressForm from '../guest-checkout-details/shipping-address-form'
 
 export default function GuestCcInfo(props) {
 
@@ -80,6 +80,8 @@ export default function GuestCcInfo(props) {
     
   }
   const transitionLabel = MiscServices.transitionLabel
+
+  //will need to set up paypal and google pay account.
 
   return (
     <section className="cc-info-con">

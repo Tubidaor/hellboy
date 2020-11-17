@@ -1,4 +1,4 @@
-import ShippingAddressForm from "../guest-checkout-details/shipping-address";
+import ShippingAddressForm from "../guest-checkout-details/shipping-address-form";
 
 
 export default function BillingAddress(props) {

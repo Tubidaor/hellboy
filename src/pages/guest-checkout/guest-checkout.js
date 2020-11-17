@@ -1,21 +1,44 @@
 import React, { Component } from 'react'
 import './guest-checkout.css'
-import ShippingAddressForm from '../../components/guest-checkout-details/shipping-address'
+import ShippingAddressForm from '../../components/guest-checkout-details/shipping-address-form'
 import  { uspsResponse }  from '../../pages/checkout-page/jsonresponse'
 import ShippingDetails from '../../components/shipping-details/shipping-details'
 import GuestCcInfo from '../../components/guest-cc-info/guest-cc-info'
+import ReviewOrder from '../../components/review-order/review-order'
+import { ProdServices } from '../../services/product-services'
 
 export default class GuestCheckout extends Component {
 
   state = {
     page: 'address',
-    name: null,
-    address: null,
+    cart: [],
+    name: {},
+    address: {},
     email: null,
     shippingOptions: [],
     shippingRate: null,
     deliveryDate: null
   }
+
+  componentDidMount() {
+    const cartItems = ProdServices.getCartFromSessionStorage()
+    
+    // const customer = CustomerServices.getCustomerInfo()
+
+    // this.setState({
+    //   customer,
+    //   destinationZip: customer.zip
+    // })
+
+    if(this.state.cart.length === 0) {
+      console.log(this.state.cart)
+      console.log('setting state')
+      this.setState({
+        cart: cartItems.items
+      }, console.log(cartItems.items))
+    }
+  }
+  
 
   componentDidUpdate(prevProps, prevState) {
     if((prevState.page !== this.state.page) && (this.state.page === "shipping")) {
@@ -86,15 +109,30 @@ export default class GuestCheckout extends Component {
       page: "payment"
     })
   }
-
+  handleCcSub = (e) => {
+    e.preventDefault()
+    this.setState({
+      page: "review"
+    })
+  }
   render() {
-    const { page, shippingOptions, address } = this.state
-
+    const { cart, page, shippingOptions, address, name } = this.state
+    const customer = { 
+      first_name: name.first_name,
+      last_name: name.last_name,
+      address_line1: address.address_line1,
+      address_line1: address.address_line2,
+      city: address.city,
+      state: address.state,
+      zip: address.zip
+    }
+    console.log('customer', customer)
     return (
       <main className="guest-checkout-main">
         {
           page === "address" &&
           <ShippingAddressForm
+            button={true}
             handleAddressSubmission={this.handleAddressSubmission}
           />
         }
@@ -116,6 +154,10 @@ export default class GuestCheckout extends Component {
         {
           page === "payment" &&
           <GuestCcInfo handleCcSub={this.handleCcSub} address={address}/>
+        }
+        {
+          page === "review" &&
+          <ReviewOrder cart={cart} customer={customer}/>
         }
       </main>
     )
