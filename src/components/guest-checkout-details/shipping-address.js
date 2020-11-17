@@ -1,3 +1,4 @@
+import { MiscServices } from '../../services/misc-services'
 import './guest-checkout-details.css'
 
 export default function ShippingAddressForm(props) {
@@ -95,12 +96,15 @@ export default function ShippingAddressForm(props) {
       address: address,
       email: email
     }
-  return shippingInfo
-}
+    return shippingInfo
+  }
+
+  const transLabel = MiscServices.transitionLabel
   return (
-    <form>
+    <form className="ship-address-form">
       <div className="first-name-con">
-        <label htmlFor="first-name">First name</label>
+        <label htmlFor="first-name" id="first-name-lab">First name</label>
+        <label htmlFor="first-name" id="first-name-hid">First name</label>
         <input
           name="first-name"
           id="first-name"
@@ -108,11 +112,13 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter first name for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("first-name-lab", "first-name-hid", "first-name")}
+          onBlur={e => transLabel("first-name-hid", "first-name-lab", "first-name")}
+        />
       </div>
       <div className="last-name-con">
-        <label htmlFor="last-name">Last name</label>
+        <label htmlFor="last-name" id="last-name-lab">Last name</label>
+        <label htmlFor="last-name" id="last-name-hid">Last name</label>
         <input
           name="last-name"
           id="last-name"
@@ -120,11 +126,13 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter last name for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("last-name-lab", "last-name-hid", "last-name")}
+          onBlur={e => transLabel("last-name-hid", "last-name-lab", "last-name")}
+        />
       </div>
       <div className="address-line1-con">
-        <label htmlFor="address-line1">Address Line 1</label>
+        <label htmlFor="address-line1" id="address-line1-lab">Address Line 1</label>
+        <label htmlFor="address-line1" id="address-line1-hid">Address Line 1</label>
         <input
           name="address-line1"
           id="address-line1"
@@ -132,11 +140,14 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter address line one for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("address-line1-lab", "address-line1-hid", "address-line1")}
+          onBlur={e => transLabel("address-line1-hid", "address-line1-lab", "address-line1")}
+        />
       </div>
       <div className="address-line2-con">
-        <label htmlFor="address-line2">Address Line 2</label>
+        <label htmlFor="address-line2" id="address-line2-lab">Address Line 2</label>
+        <label htmlFor="address-line2" id="address-line2-hid">Address Line 2</label>
+
         <input
           name="address-line2"
           id="address-line2"
@@ -144,11 +155,13 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter address line two for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("address-line2-lab", "address-line2-hid", "address-line2")}
+          onBlur={e => transLabel("address-line2-hid", "address-line2-lab", "address-line2")}
+        />
       </div>
       <div className="city-con">
-        <label htmlFor="city">City</label>
+        <label htmlFor="city" id="city-lab">City</label>
+        <label htmlFor="city" id="city-hid">City</label>
         <input
           name="city"
           id="city"
@@ -156,21 +169,28 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter city for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("city-lab", "city-hid", "city")}
+          onBlur={e => transLabel("city-hid", "city-lab", "city")}
+        />
       </div>
       <div className="state-con">
-        <label htmlFor="state">State</label>
+        <label htmlFor="state" id="state-lab">State</label>
+        <label htmlFor="state" id="state-hid">State</label>
+
         <select
           id="state"
           aria-label="Enter state for checkout"
           className="state"
+          onFocus={e => transLabel("state-lab", "state-hid", "state")}
+          onBlur={e => transLabel("state-hid", "state-lab", "state")}
         >
+          <option value=""></option>
           {displayOptions}
         </select>
       </div>
       <div className="zip-con">
-        <label htmlFor="zip">Zip Code</label>
+        <label htmlFor="zip" id="zip-lab">Zip Code</label>
+        <label htmlFor="zip" id="zip-hid">Zip Code</label>
         <input
           name="zip"
           id="zip"
@@ -178,11 +198,13 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter address line two for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("zip-lab", "zip-hid", "zip")}
+          onBlur={e => transLabel("zip-hid", "zip-lab", "zip")}
+        />
       </div>
       <div className="email-con">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" id="email-lab">Email</label>
+        <label htmlFor="email" id="email-hid">Email</label>
         <input
           name="email"
           id="email"
@@ -190,14 +212,18 @@ export default function ShippingAddressForm(props) {
           aria-label="Enter address line two for checkout"
           aria-required="true"
           aria-describedby="errorMessage"
-        >
-        </input>
+          onFocus={e => transLabel("email-lab", "email-hid", "email")}
+          onBlur={e => transLabel("email-hid", "email-lab", "email")}
+        />
       </div>
-      <button
-        onClick={e => props.handleAddressSubmission(e, returnFormInfo())}
-      >
-        Continue
-      </button>
+      {
+        props.button == true &&
+        <button
+          onClick={e => props.handleAddressSubmission(e, returnFormInfo())}
+        >
+          Continue
+        </button>
+      }
     </form>
   )
 }

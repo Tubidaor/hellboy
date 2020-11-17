@@ -1,0 +1,28 @@
+.ship-address-form {
+  padding-left: 20px;
+}
+#first-name-lab, #last-name-lab, #address-line1-lab, #address-line2-lab,
+  #zip-lab, #state-lab, #city-lab, #email-lab {
+  position: relative;
+  left: 10px;
+  top: 25px;
+  width: fit-content;
+  font-size: 1rem;
+  display: block;
+}
+#first-name-hid, #last-name-hid, #address-line1-hid, #address-line2-hid,
+  #zip-hid, #state-hid, #city-hid, #email-hid {
+  position: relative;
+  font-size: .83rem;
+  top: 5px;
+  left: 4px;
+  display: none;
+  background-color: white;
+  width: fit-content;
+  padding-top: 2px;
+}
+#first-name, #last-name, #address-line1, #address-line2, #zip, #state, #city,
+#email {
+  height: 40px;
+  width: fit-content;
+}

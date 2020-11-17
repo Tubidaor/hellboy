@@ -48,3 +48,6 @@
 .ship-component-con {
   display: block;
 }
+#bill-not-same-as-ship-con {
+  display: none;
+}

@@ -1,0 +1,18 @@
+#cc-num-lab, #cc-code-lab, #cc-month-lab, #cc-year-lab {
+  position: relative;
+  left: 10px;
+  top: 25px;
+  width: fit-content;
+  font-size: 1rem;
+  display: block;
+}
+#cc-num-hid, #cc-code-hid, #cc-month-hid, #cc-year-hid {
+  position: relative;
+  font-size: .83rem;
+  top: 5px;
+  left: 4px;
+  display: none;
+  background-color: white;
+  width: fit-content;
+  padding-top: 2px;
+}

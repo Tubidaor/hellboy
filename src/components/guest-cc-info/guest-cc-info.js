@@ -1,5 +1,7 @@
 import ShippingAddress from '../shipping-address/shipping-address'
 import './guest-cc-info.css'
+import { MiscServices } from '../../services/misc-services'
+import ShippingAddressForm from '../guest-checkout-details/shipping-address'
 
 export default function GuestCcInfo(props) {
 
@@ -27,7 +29,6 @@ export default function GuestCcInfo(props) {
     return year
   }
   
-  console.log(getSetYear(2))
   const years = [
     getSetYear(0),
     getSetYear(1),
@@ -58,36 +59,27 @@ export default function GuestCcInfo(props) {
     return ccInfo
   }
 
-  function transitionLabel(hide, show, input) {
-    const hiding  = document.getElementById(hide)
-    const showing = document.getElementById(show)
-    const inputText = document.getElementById(input)
-    console.log(inputText.value)
-    if(window.getComputedStyle(showing).display === "none" && inputText.value === "") {
-      hiding.style.display = "none"
-      showing.style.display = "block"
-    }
-  }
-
-
-
-
   const displayMonths = months.map(m => <option value={m.slice(0,3)}>{m}</option>)
   const displayYears = years.map(y => <option value={y}>{y}</option>)
 
   function shipCheckbox() {
     const sameAsShipping = document.getElementById("same-as-shipping")
     const shipCon = document.getElementById("ship-component-con")
-    console.log(sameAsShipping.checked === "checked")
+    const billAdress = document.getElementById("bill-not-same-as-ship-con")
+
     if(sameAsShipping.checked === true) {
       shipCon.style.display = "block"
+      billAdress.style.display = "none"
       sameAsShipping.setAttribute("checked", "")
     } else {
       shipCon.style.display = "none"
+      billAdress.style.display = "block"
       sameAsShipping.setAttribute("checked", "checked")
+
     }
     
   }
+  const transitionLabel = MiscServices.transitionLabel
 
   return (
     <section className="cc-info-con">
@@ -164,6 +156,9 @@ export default function GuestCcInfo(props) {
           <label htmlFor="same-as-shipping">Same as shipping</label>
           <div className="ship-component-con" id="ship-component-con">
             <ShippingAddress customer={props.address}/>
+          </div>
+          <div id="bill-not-same-as-ship-con">
+            <ShippingAddressForm button={false}/>
           </div>
         </div>
         <button type="submit" className="cc-btn" onClick={e => props.handleCcSub(e, getCcData())}>Continue</button>
