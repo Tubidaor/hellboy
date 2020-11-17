@@ -10,6 +10,8 @@ import CartPage from './pages/cart-page/cart-page'
 import LoginPage from './pages/login-page/login-page'
 import RegPage from './pages/reg-page/reg-page'
 import CheckoutPage from './pages/checkout-page/checkout-page'
+import GuestCheckout from './pages/guest-checkout/guest-checkout'
+import CheckoutLogin from './pages/checkout-login/checkout-login'
 
 
 function App() {
@@ -47,8 +49,17 @@ function App() {
           component={RegPage}
         />
         <Route
+          path={"/checkout/login-guest"}
+          component={CheckoutLogin}
+        />
+        <Route
+          exact
           path={"/checkout"}
           component={CheckoutPage}
+        />
+        <Route
+          path={"/checkout/guest"}
+          component={GuestCheckout}
         />
 
       </Switch>

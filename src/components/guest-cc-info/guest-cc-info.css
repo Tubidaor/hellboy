@@ -1,0 +1,50 @@
+.cc-info-con {
+  padding-left: 20px;
+}
+.cc-input-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#cc-num-lab, #cc-code-lab, #cc-month-lab, #cc-year-lab {
+  position: relative;
+  left: 10px;
+  top: 25px;
+  width: fit-content;
+  font-size: 1rem;
+  display: block;
+}
+#cc-num-hid, #cc-code-hid, #cc-month-hid, #cc-year-hid {
+  position: relative;
+  font-size: .83rem;
+  top: 5px;
+  left: 4px;
+  display: none;
+  background-color: white;
+  width: fit-content;
+  padding-top: 2px;
+}
+.cc-input-con > input {
+  height: 40px;
+  width: fit-content;
+  padding-right: 20px;
+}
+#cc-month {
+  height: 40px;
+  width: 120px;
+  padding-right: 20px;
+}
+#cc-year {
+  height: 40px;
+  width: 100px;
+  padding-right: 20px;
+}
+.cc-year-month-con {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 240px;
+}
+.ship-component-con {
+  display: block;
+}

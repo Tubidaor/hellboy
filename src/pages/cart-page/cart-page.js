@@ -41,7 +41,8 @@ export default class CartPage extends Component {
   }
   goToCheckout = () => {
     const { history } = this.props
-    const destination = "/checkout"
+    //if logged in go to checkout. otherwise togo login-guest page
+    const destination = "/checkout/login-guest"
     history.push(destination)
   }
   addQuantity = (index) => {
